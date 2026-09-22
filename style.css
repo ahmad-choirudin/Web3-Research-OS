@@ -66,3 +66,25 @@ button {
 button:hover {
   opacity: 0.8;
 }
+
+.overview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.stat-card {
+  margin-bottom: 0;
+}
+
+.stat-card h3 {
+  color: #888;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.stat-card p {
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: bold;
+}

@@ -88,3 +88,55 @@ button:hover {
   font-size: 32px;
   font-weight: bold;
 }
+
+.navbar {
+  max-width: 1100px;
+  margin: 0 auto 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: #888;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: #fff;
+}
+
+.search-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 12px 15px;
+  background: #151515;
+  border: 1px solid #292929;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #555;
+}
+
+.search-box button {
+  padding: 12px 20px;
+}

@@ -64,3 +64,25 @@ function displayProjects(projectList) {
 }
 
 displayProjects(projects);
+
+const searchInput = document.getElementById("searchInput");
+const searchButton = document.getElementById("searchButton");
+
+function searchProjects() {
+  const keyword = searchInput.value.toLowerCase();
+
+  const filteredProjects = projects.filter((project) =>
+    project.name.toLowerCase().includes(keyword) ||
+    project.chain.toLowerCase().includes(keyword)
+  );
+
+  displayProjects(filteredProjects);
+}
+
+searchButton.addEventListener("click", searchProjects);
+
+searchInput.addEventListener("keyup", (event) => {
+  if (event.key === "Enter") {
+    searchProjects();
+  }
+});

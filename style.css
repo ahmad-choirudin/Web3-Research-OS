@@ -1,20 +1,20 @@
 :root {
-    --bg-main: #0b0e14;
-    --bg-card: #151a23;
-    --bg-hover: #1e2532;
+    --bg-main: #f5f7fa;
+    --bg-card: #ffffff;
+    --bg-hover: #f1f5f9;
 
-    --border-color: #262f40;
+    --border-color: #e2e8f0;
 
-    --text-main: #f1f5f9;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
+    --text-main: #111827;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
 
-    --blue: #3b82f6;
-    --cyan: #06b6d4;
-    --green: #22c55e;
-    --purple: #a855f7;
-    --orange: #f97316;
-    --red: #ef4444;
+    --blue: #2563eb;
+    --cyan: #0891b2;
+    --green: #16a34a;
+    --purple: #9333ea;
+    --orange: #ea580c;
+    --red: #dc2626;
 
     --font-main: "Inter", sans-serif;
     --font-mono: "JetBrains Mono", monospace;
@@ -35,7 +35,8 @@ body {
 
 button,
 input,
-select {
+select,
+textarea {
     font-family: inherit;
 }
 
@@ -50,7 +51,7 @@ button {
     width: 240px;
     height: 100vh;
     padding: 24px 16px;
-    background: #10141c;
+    background: #ffffff;
     border-right: 1px solid var(--border-color);
 }
 
@@ -69,7 +70,7 @@ button {
     place-items: center;
     border-radius: 9px;
     background: var(--blue);
-    color: white;
+    color: #ffffff;
 }
 
 .brand h1 {
@@ -109,8 +110,8 @@ button {
 }
 
 .nav-item.active {
-    background: rgba(59, 130, 246, 0.14);
-    color: #60a5fa;
+    background: #eff6ff;
+    color: var(--blue);
 }
 
 .nav-item i {
@@ -126,7 +127,7 @@ button {
     padding: 14px;
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    background: var(--bg-card);
+    background: #f8fafc;
 }
 
 .gas-title {
@@ -142,6 +143,7 @@ button {
     margin-top: 7px;
     font-family: var(--font-mono);
     font-size: 20px;
+    color: var(--text-main);
 }
 
 .gas-status {
@@ -189,22 +191,22 @@ button {
 
 .btn-primary {
     background: var(--blue);
-    color: white;
+    color: #ffffff;
 }
 
 .btn-primary:hover {
-    background: #2563eb;
+    background: #1d4ed8;
 }
 
 .btn-secondary {
-    background: var(--bg-card);
+    background: #ffffff;
     border: 1px solid var(--border-color);
     color: var(--text-secondary);
 }
 
 .btn-secondary:hover {
-    color: var(--text-main);
     background: var(--bg-hover);
+    color: var(--text-main);
 }
 
 .view {
@@ -241,22 +243,22 @@ button {
 }
 
 .stat-icon.blue {
-    background: rgba(59, 130, 246, 0.12);
+    background: #eff6ff;
     color: var(--blue);
 }
 
 .stat-icon.purple {
-    background: rgba(168, 85, 247, 0.12);
+    background: #faf5ff;
     color: var(--purple);
 }
 
 .stat-icon.green {
-    background: rgba(34, 197, 94, 0.12);
+    background: #f0fdf4;
     color: var(--green);
 }
 
 .stat-icon.orange {
-    background: rgba(249, 115, 22, 0.12);
+    background: #fff7ed;
     color: var(--orange);
 }
 
@@ -319,7 +321,7 @@ button {
     border: 1px solid var(--border-color);
     border-radius: 6px;
     outline: none;
-    background: #10141c;
+    background: #ffffff;
     color: var(--text-main);
     font-size: 12px;
 }
@@ -334,7 +336,7 @@ button {
     width: 36px;
     border-radius: 6px;
     background: var(--blue);
-    color: white;
+    color: #ffffff;
     cursor: pointer;
 }
 
@@ -347,7 +349,7 @@ button {
     align-items: center;
     gap: 10px;
     padding: 10px 0;
-    border-bottom: 1px solid rgba(38, 47, 64, 0.6);
+    border-bottom: 1px solid var(--border-color);
     font-size: 12px;
 }
 
@@ -388,8 +390,8 @@ table {
 
 th {
     padding: 11px 16px;
+    background: #f8fafc;
     color: var(--text-muted);
-    background: #111620;
     font-family: var(--font-mono);
     font-size: 10px;
     font-weight: 500;
@@ -399,12 +401,12 @@ th {
 
 td {
     padding: 13px 16px;
-    border-top: 1px solid rgba(38, 47, 64, 0.7);
+    border-top: 1px solid var(--border-color);
     color: var(--text-secondary);
 }
 
 tr:hover td {
-    background: rgba(255, 255, 255, 0.015);
+    background: #f8fafc;
 }
 
 .protocol-name {
@@ -421,28 +423,28 @@ tr:hover td {
 }
 
 .badge-blue {
-    background: rgba(59, 130, 246, 0.12);
-    color: #60a5fa;
+    background: #eff6ff;
+    color: #2563eb;
 }
 
 .badge-green {
-    background: rgba(34, 197, 94, 0.12);
-    color: #4ade80;
+    background: #f0fdf4;
+    color: #16a34a;
 }
 
 .badge-purple {
-    background: rgba(168, 85, 247, 0.12);
-    color: #c084fc;
+    background: #faf5ff;
+    color: #9333ea;
 }
 
 .badge-red {
-    background: rgba(239, 68, 68, 0.12);
-    color: #f87171;
+    background: #fef2f2;
+    color: #dc2626;
 }
 
 .badge-orange {
-    background: rgba(249, 115, 22, 0.12);
-    color: #fb923c;
+    background: #fff7ed;
+    color: #ea580c;
 }
 
 .filters {
@@ -464,7 +466,7 @@ tr:hover td {
     padding: 5px 8px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
-    background: transparent;
+    background: #ffffff;
     color: var(--text-secondary);
     cursor: pointer;
 }
@@ -531,7 +533,7 @@ tr:hover td {
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.65);
+    background: rgba(15, 23, 42, 0.45);
 }
 
 .modal-overlay.active {
@@ -543,8 +545,8 @@ tr:hover td {
     max-width: 480px;
     border: 1px solid var(--border-color);
     border-radius: 10px;
-    background: var(--bg-card);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    background: #ffffff;
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.15);
 }
 
 .modal-header {
@@ -593,7 +595,7 @@ tr:hover td {
     border: 1px solid var(--border-color);
     border-radius: 6px;
     outline: none;
-    background: #10141c;
+    background: #ffffff;
     color: var(--text-main);
     font-size: 12px;
 }

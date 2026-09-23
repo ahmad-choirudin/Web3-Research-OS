@@ -1,67 +1,408 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web3 Research OS</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Web3 Research OS</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet"
+    >
 </head>
 
 <body>
 
-  <header>
-    <h1>Web3 Research OS</h1>
-    <p>Research, track, and organize Web3 projects.</p>
-  </header>
+    <aside class="sidebar">
 
-  <main>
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-cube"></i>
+            </div>
 
-    <div class="search-box">
-  <input
-    type="text"
-    id="searchInput"
-    placeholder="Search Web3 projects..."
-  >
-  <button id="searchButton">Search</button>
-</div>
+            <div>
+                <h1>Web3 OS</h1>
+                <span>v2.0</span>
+            </div>
+        </div>
 
-    <section>
-  <h2>Overview</h2>
+        <nav class="nav-menu">
 
-  <div class="overview">
-    
-    <div class="stat-card">
-      <h3>Projects</h3>
-      <p>0</p>
+            <button class="nav-item active" data-tab="dashboard">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Dashboard</span>
+            </button>
+
+            <button class="nav-item" data-tab="protocols">
+                <i class="fa-solid fa-layer-group"></i>
+                <span>Protocols</span>
+            </button>
+
+            <button class="nav-item" data-tab="wallets">
+                <i class="fa-solid fa-wallet"></i>
+                <span>Wallets</span>
+            </button>
+
+            <button class="nav-item" data-tab="yield">
+                <i class="fa-solid fa-coins"></i>
+                <span>Yield</span>
+            </button>
+
+            <button class="nav-item" data-tab="notes">
+                <i class="fa-solid fa-note-sticky"></i>
+                <span>Notes</span>
+            </button>
+
+        </nav>
+
+        <div class="gas-widget">
+            <div class="gas-title">
+                <span>ETH GAS</span>
+                <i class="fa-solid fa-gas-pump"></i>
+            </div>
+
+            <div class="gas-value" id="gas-price">
+                12 Gwei
+            </div>
+
+            <span class="gas-status">
+                Normal
+            </span>
+        </div>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+                <h2 id="page-title">Dashboard</h2>
+                <p>Web3 research workspace</p>
+            </div>
+
+            <div class="topbar-actions">
+
+                <button class="btn btn-secondary" id="export-btn">
+                    <i class="fa-solid fa-download"></i>
+                    Export
+                </button>
+
+                <button class="btn btn-primary" id="add-item-btn">
+                    <i class="fa-solid fa-plus"></i>
+                    Add Item
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- DASHBOARD -->
+
+        <section class="view active" id="view-dashboard">
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+
+                    <div>
+                        <span>Protocols</span>
+                        <strong id="stat-protocols">0</strong>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+
+                    <div>
+                        <span>High Priority</span>
+                        <strong id="stat-airdrops">0</strong>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+
+                    <div>
+                        <span>Capital</span>
+                        <strong id="stat-capital">$0</strong>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fa-solid fa-address-book"></i>
+                    </div>
+
+                    <div>
+                        <span>Wallets</span>
+                        <strong id="stat-wallets">0</strong>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-grid">
+
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <h3>Daily Tasks</h3>
+                            <span>Things to do today</span>
+                        </div>
+                    </div>
+
+                    <div class="task-input">
+
+                        <input
+                            type="text"
+                            id="task-input"
+                            placeholder="Add a new task..."
+                        >
+
+                        <button id="add-task-btn">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+
+                    </div>
+
+                    <div class="task-list" id="task-list"></div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h3>Priority Airdrops</h3>
+                            <span>Protocols worth watching</span>
+                        </div>
+
+                    </div>
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Protocol</th>
+                                    <th>Status</th>
+                                    <th>Priority</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="priority-table"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROTOCOLS -->
+
+        <section class="view" id="view-protocols">
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h3>Protocol Research</h3>
+                        <span>Track protocols and opportunities</span>
+                    </div>
+
+                    <div class="filters">
+
+                        <input
+                            type="text"
+                            id="protocol-search"
+                            placeholder="Search..."
+                        >
+
+                        <select id="protocol-filter">
+                            <option value="all">All</option>
+                            <option value="researching">Researching</option>
+                            <option value="active">Active</option>
+                            <option value="completed">Completed</option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Protocol</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                                <th>Priority</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="protocol-table"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- WALLETS -->
+
+        <section class="view" id="view-wallets">
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h3>Wallet Matrix</h3>
+                        <span>Track your Web3 wallets</span>
+                    </div>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Network</th>
+                                <th>Address</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="wallet-table"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- YIELD -->
+
+        <section class="view" id="view-yield">
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h3>Yield & Staking</h3>
+                        <span>Track staking positions</span>
+                    </div>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Asset</th>
+                                <th>Protocol</th>
+                                <th>Amount</th>
+                                <th>APY</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="yield-table"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- NOTES -->
+
+        <section class="view" id="view-notes">
+
+            <div class="notes-grid" id="notes-grid"></div>
+
+        </section>
+
+    </main>
+
+
+    <!-- MODAL -->
+
+    <div class="modal-overlay" id="modal-overlay">
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <h3 id="modal-title">Add Item</h3>
+
+                <button id="modal-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+            <div id="modal-body-content"></div>
+
+        </div>
+
     </div>
 
-    <div class="stat-card">
-      <h3>Active Quests</h3>
-      <p>0</p>
-    </div>
 
-    <div class="stat-card">
-      <h3>Completed</h3>
-      <p>0</p>
-    </div>
+    <script src="app.js"></script>
 
-  </div>
-</section>
-
-    <section>
-  <h2>My Projects</h2>
-<section>
-  <h2>My Projects</h2>
-
-  <div class="project-grid" id="projectGrid"></div>
-
-</section>
-
-  </div>
-</section>
-
-  </main>
-
-  <script src="script.js"></script>
 </body>
 </html>

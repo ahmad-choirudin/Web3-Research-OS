@@ -47,7 +47,7 @@ export default function Dashboard({ coins, live, go }: { coins: Coin[]; live: bo
           <div className="mt-5 grid grid-cols-2 gap-3 md:w-[72%] md:grid-cols-4">
             {STATS.map(({ k, m, v, d, Icon }) => (
               <div key={k} className="rounded-xl border border-nx-line bg-nx-panel/70 p-3">
-                <div className="flex items-center gap-2 text-xs text-nx-soft"><span className="grid h-7 w-7 place-items-center rounded-lg bg-nx-accent/25 text-cyan-300"><Icon size={14} /></span><span className="md:hidden">{m}</span><span className="hidden md:inline">{k}</span></div>
+                <div className="flex items-center gap-2 text-xs text-nx-soft"><span className="grid h-7 w-7 place-items-center rounded-lg bg-nx-accent/25 text-nx-glow"><Icon size={14} /></span><span className="md:hidden">{m}</span><span className="hidden md:inline">{k}</span></div>
                 <div className="mt-2 flex items-end justify-between gap-1"><span className="text-xl font-semibold md:text-2xl">{v}</span><span className="text-[11px] text-nx-up">{d}</span></div>
               </div>
             ))}
@@ -84,7 +84,7 @@ export default function Dashboard({ coins, live, go }: { coins: Coin[]; live: bo
             <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
               {actions.map(({ l, d, Icon, p }) => (
                 <button key={l} onClick={() => go(p)} className="flex items-center gap-3 rounded-xl border border-nx-line bg-nx-panel/70 p-3 text-left transition hover:border-nx-accent">
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-nx-accent/30 text-cyan-200"><Icon size={18} /></span>
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-nx-accent/30 text-nx-glow"><Icon size={18} /></span>
                   <span><span className="block text-sm font-medium">{l}</span><span className="block text-[11px] text-nx-soft">{d}</span></span>
                 </button>))}
             </div>
@@ -92,11 +92,11 @@ export default function Dashboard({ coins, live, go }: { coins: Coin[]; live: bo
         </div>
 
         <Card className="hidden p-5 md:block">
-          <div className="flex items-center justify-between"><h2 className="text-lg font-semibold">Latest News</h2><button onClick={() => go('library')} className="flex items-center gap-1 text-xs text-cyan-300 hover:text-white">View All <ArrowRight size={12} /></button></div>
+          <div className="flex items-center justify-between"><h2 className="text-lg font-semibold">Latest News</h2><button onClick={() => go('library')} className="flex items-center gap-1 text-xs text-nx-glow hover:text-white">View All <ArrowRight size={12} /></button></div>
           <ul className="mt-3">{news.items.slice(0, 4).map(n => (
             <li key={n.id} className="border-t border-nx-line/70 first:border-0">
               <a href={n.url} target="_blank" rel="noopener noreferrer" className="flex gap-3 py-4 hover:opacity-90">
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-nx-accent/40 to-purple-900/40 text-cyan-200"><Newspaper size={20} /></span>
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-nx-accent/40 to-blue-900/40 text-nx-glow"><Newspaper size={20} /></span>
                 <div><div className="text-sm font-medium leading-snug">{n.title}</div><div className="mt-1 flex items-center gap-1 text-xs text-nx-soft"><Zap size={10} />{timeAgo(n.time)} · {n.source}</div></div>
               </a>
             </li>))}

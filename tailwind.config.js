@@ -5,8 +5,8 @@ export default {
     extend: {
       colors: {
         nx: {
-          bg: '#000000', panel: '#0a0a0a', card: '#111111', line: '#262626',
-          accent: '#22d3ee', soft: '#a3a3a3', up: '#3dffb0', down: '#ff3d9a',
+          bg: '#05080f', panel: '#0a101c', card: '#0e1626', line: '#1c2b4a',
+          accent: '#00a3ff', glow: '#93c5ff', soft: '#8fa3c4', up: '#3dffb0', down: '#ff3d9a',
         },
       },
     },

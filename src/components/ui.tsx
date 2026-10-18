@@ -44,4 +44,4 @@ export const PageHeader = ({ title, back, action }: { title: string; back?: () =
 )
 
 export const inputCls = 'w-full rounded-xl border border-nx-line bg-nx-panel/80 px-3 py-2 text-sm text-white placeholder:text-nx-soft/60 focus:border-nx-accent'
-export const btnCls = 'rounded-xl bg-nx-accent px-4 py-2 text-sm font-medium text-black transition hover:bg-[#67e8f9]'
+export const btnCls = 'rounded-xl bg-nx-accent px-4 py-2 text-sm font-medium text-black transition hover:bg-[#5a98ff]'

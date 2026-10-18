@@ -59,7 +59,7 @@ export default function Assistant({ go, coins }: { go: Go; coins: Coin[] }) {
       <div className="mt-3 flex gap-2">
         <input value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && send()} placeholder="Type your question…" aria-label="Question"
           className="flex-1 rounded-xl border border-nx-line bg-nx-panel/80 px-4 py-3 text-sm placeholder:text-nx-soft/60 focus:border-nx-accent" />
-        <button onClick={send} disabled={busy} aria-label="Send" className="grid h-12 w-12 place-items-center rounded-xl bg-nx-accent text-black hover:bg-[#67e8f9] disabled:opacity-50"><Send size={18} /></button>
+        <button onClick={send} disabled={busy} aria-label="Send" className="grid h-12 w-12 place-items-center rounded-xl bg-nx-accent text-black hover:bg-[#5a98ff] disabled:opacity-50"><Send size={18} /></button>
       </div>
     </div>
   )

@@ -34,7 +34,7 @@ export default function Wallets({ go }: { go: Go }) {
       <Card className="divide-y divide-nx-line/70">
         {shown.map(w => (
           <div key={w.addr} className="flex items-center gap-3 p-4">
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-nx-accent/30 text-cyan-200"><W size={18} /></span>
+            <span className="grid h-10 w-10 place-items-center rounded-full bg-nx-accent/30 text-nx-glow"><W size={18} /></span>
             <div className="flex-1"><div className="font-mono text-sm">{short(w.addr)}</div><div className="text-xs text-nx-soft">{w.label}</div></div>
             <div className="text-right"><div className="font-medium">{w.value === null ? '–' : '$' + w.value.toLocaleString()}</div><div className="text-xs">{w.change === null ? <span className="text-nx-soft">no data yet</span> : <Change v={w.change} />}</div></div>
             <button aria-label="Delete wallet" onClick={() => setList(list.filter(x => x.addr !== w.addr))} className="text-nx-soft hover:text-white"><X size={16} /></button>

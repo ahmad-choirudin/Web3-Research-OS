@@ -5,8 +5,9 @@ export default {
     extend: {
       colors: {
         nx: {
-          bg: '#05080f', panel: '#0a101c', card: '#0e1626', line: '#1c2b4a',
-          accent: '#00a3ff', glow: '#93c5ff', soft: '#8fa3c4', up: '#3dffb0', down: '#ff3d9a',
+          bg: '#0a0612', panel: '#110a1f', card: '#170d2b', line: '#33204f',
+          accent: '#ff3dcb', hover: '#ff66d6', glow: '#ff9de8', alt: '#22d3ee',
+          soft: '#a994c9', up: '#2ff3c8', down: '#ff5c4d',
         },
       },
     },

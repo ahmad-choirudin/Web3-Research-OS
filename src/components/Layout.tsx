@@ -17,7 +17,7 @@ export const NAV: { id: Page; label: string; Icon: LucideIcon }[] = [
 
 export const Logo = ({ small }: { small?: boolean }) => (
   <div className="flex items-center gap-3">
-    <span className="grid place-items-center rounded-xl bg-gradient-to-br from-nx-accent to-cyan-400 text-black" style={{ width: small ? 34 : 40, height: small ? 34 : 40 }}><Box size={small ? 18 : 22} /></span>
+    <span className="grid place-items-center rounded-xl bg-gradient-to-br from-nx-accent to-nx-alt text-black" style={{ width: small ? 34 : 40, height: small ? 34 : 40 }}><Box size={small ? 18 : 22} /></span>
     <div className="leading-tight"><div className={`font-bold tracking-wide ${small ? 'text-base' : 'text-xl'}`}>CUBBIE</div><div className="text-[11px] text-nx-soft">Web3 Research OS</div></div>
   </div>
 )
@@ -35,7 +35,7 @@ export function Sidebar({ page, go }: { page: Page; go: Go }) {
           </button>
         ))}
       </nav>
-      <div className="mt-auto rounded-2xl border border-nx-line bg-gradient-to-br from-nx-accent/30 to-blue-900/30 p-4">
+      <div className="mt-auto rounded-2xl border border-nx-line bg-gradient-to-br from-nx-accent/30 to-nx-alt/30 p-4">
         <div className="font-semibold leading-snug">Build better<br />Web3 insights.</div>
         <div className="mt-3 text-xs text-nx-soft">Research · Analyze · Grow</div>
       </div>

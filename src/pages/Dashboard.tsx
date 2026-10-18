@@ -18,8 +18,8 @@ const STATS = [
 function HeroImage() {
   return (
     <>
-      <img src={`${import.meta.env.BASE_URL}hero.jpg`} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover object-center" />
-      <div className="absolute inset-0 bg-gradient-to-r from-nx-bg via-nx-bg/85 to-nx-bg/60 md:to-nx-bg/5" />
+      <img src={import.meta.env.BASE_URL + 'hero.jpg'} alt="" aria-hidden className="hero-img absolute inset-y-0 right-0 h-full w-full object-cover object-[60%_30%] md:w-[62%]" />
+      <div className="absolute inset-0 bg-nx-bg/80 md:hidden" />
     </>
   )
 }
@@ -100,7 +100,7 @@ export default function Dashboard({ coins, live, go }: { coins: Coin[]; live: bo
           <ul className="mt-3">{news.items.slice(0, 4).map(n => (
             <li key={n.id} className="border-t border-nx-line/70 first:border-0">
               <a href={n.url} target="_blank" rel="noopener noreferrer" className="flex gap-3 py-4 hover:opacity-90">
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-nx-accent/40 to-blue-900/40 text-nx-glow"><Newspaper size={20} /></span>
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-nx-accent/40 to-nx-alt/40 text-nx-glow"><Newspaper size={20} /></span>
                 <div><div className="text-sm font-medium leading-snug">{n.title}</div><div className="mt-1 flex items-center gap-1 text-xs text-nx-soft"><Zap size={10} />{timeAgo(n.time)} · {n.source}</div></div>
               </a>
             </li>))}

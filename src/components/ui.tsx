@@ -17,7 +17,7 @@ export function Sparkline({ data, up = true, className = 'h-8 w-24' }: { data: n
   const pts = data.map((v, i) => `${(i / (data.length - 1)) * 100},${30 - ((v - min) / r) * 28}`).join(' ')
   return (
     <svg viewBox="0 0 100 32" preserveAspectRatio="none" className={className} aria-hidden>
-      <polyline points={pts} fill="none" stroke={up ? '#3dffb0' : '#ff3d9a'} strokeWidth="1.6" vectorEffect="non-scaling-stroke" />
+      <polyline points={pts} fill="none" stroke={up ? '#2ff3c8' : '#ff5c4d'} strokeWidth="1.6" vectorEffect="non-scaling-stroke" />
     </svg>
   )
 }
@@ -52,4 +52,4 @@ export const PageHeader = ({ title, back, action }: { title: string; back?: () =
 )
 
 export const inputCls = 'w-full rounded-xl border border-nx-line bg-nx-panel/80 px-3 py-2 text-sm text-white placeholder:text-nx-soft/60 focus:border-nx-accent'
-export const btnCls = 'rounded-xl bg-nx-accent px-4 py-2 text-sm font-medium text-black transition hover:bg-[#5a98ff]'
+export const btnCls = 'rounded-xl bg-nx-accent px-4 py-2 text-sm font-medium text-black transition hover:bg-nx-hover'

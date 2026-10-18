@@ -37,7 +37,7 @@ export default function Library({ go }: { go: Go }) {
       <div className="grid gap-3 md:grid-cols-2">
         {list.map(n => (
           <Card key={n.id} className="flex items-center gap-3 p-3">
-            <span className="grid h-14 w-16 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-nx-accent/50 to-blue-900/50 text-nx-glow"><BookOpen size={20} /></span>
+            <span className="grid h-14 w-16 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-nx-accent/50 to-nx-alt/50 text-nx-glow"><BookOpen size={20} /></span>
             <div className="min-w-0 flex-1"><div className="truncate font-medium">{n.title}</div><div className="text-xs text-nx-soft">Updated {timeAgo(n.updated)} · {n.tag}</div></div>
             <button aria-label={`Delete ${n.title}`} onClick={() => setNotes(notes.filter(x => x.id !== n.id))} className="text-nx-soft hover:text-white"><X size={16} /></button>
           </Card>

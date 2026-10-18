@@ -1,3 +1,4 @@
+import WalletButton from './WalletButton'
 import { useEffect, useRef, useState } from 'react'
 import type { LucideIcon } from 'lucide-react'
 import { BarChart3, Bell, BookOpen, Bot, Columns3, Compass, Box, Home, LayoutDashboard, MoreHorizontal, Moon, Search, Settings, Wallet } from 'lucide-react'
@@ -52,7 +53,7 @@ export function Header({ go, onSearch }: { go: Go; onSearch: (q: string) => void
   const submit = () => { if (q.trim()) { onSearch(q.trim()); go('protocols'); setQ('') } }
   return (
     <>
-      <div className="flex items-center justify-between lg:hidden"><Logo small /><div className="flex items-center gap-3"><Bell size={20} className="text-nx-soft" /><Avatar /></div></div>
+      <div className="flex items-center justify-between lg:hidden"><Logo small /><div className="flex items-center gap-3"><WalletButton compact /><Bell size={20} className="text-nx-soft" /><Avatar /></div></div>
       <header className="hidden items-center gap-4 lg:flex">
         <div className="relative flex-1">
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-nx-soft" />
@@ -60,7 +61,7 @@ export function Header({ go, onSearch }: { go: Go; onSearch: (q: string) => void
             className="w-full rounded-xl border border-nx-line bg-nx-card/50 py-2.5 pl-9 pr-10 text-sm placeholder:text-nx-soft/70 focus:border-nx-accent" />
           <kbd className="absolute right-3 top-1/2 -translate-y-1/2 rounded border border-nx-line px-1.5 text-xs text-nx-soft">/</kbd>
         </div>
-        <Bell size={20} className="text-nx-soft" /><Moon size={20} className="text-nx-soft" />
+        <WalletButton /><Bell size={20} className="text-nx-soft" /><Moon size={20} className="text-nx-soft" />
         <div className="flex items-center gap-3 rounded-xl border border-nx-line bg-nx-card/50 py-1.5 pl-2 pr-4"><Avatar /><div className="text-sm leading-tight"><div className="font-medium">Ahmad Choirudin</div><div className="text-xs text-nx-soft">Researcher</div></div></div>
       </header>
     </>

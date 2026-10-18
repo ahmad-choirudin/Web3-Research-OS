@@ -11,6 +11,7 @@ import Kanban from './pages/Kanban'
 import Assistant from './pages/Assistant'
 import Settings from './pages/Settings'
 import { Analytics } from './pages/Simple'
+import CoinDetail from './pages/CoinDetail'
 
 const PATHS: Record<Page, string> = {
   dashboard: '/', library: '/library', protocols: '/protocols', wallets: '/wallets',
@@ -38,6 +39,7 @@ export default function App() {
           <Route path="/kanban" element={<Kanban go={go} />} />
           <Route path="/assistant" element={<Assistant go={go} coins={coins} />} />
           <Route path="/settings" element={<Settings go={go} />} />
+          <Route path="/coin/:id" element={<CoinDetail coins={coins} go={go} />} />
           <Route path="*" element={<Dashboard coins={coins} live={live} go={go} />} />
         </Routes>
       </div>

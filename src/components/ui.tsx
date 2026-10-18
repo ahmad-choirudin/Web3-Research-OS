@@ -27,6 +27,14 @@ const COIN: Record<string, { bg: string; ch: string }> = {
   ETH: { bg: 'linear-gradient(135deg,#5b6cff,#8b7bff)', ch: 'Ξ' },
   SOL: { bg: 'linear-gradient(135deg,#14f195,#9945ff)', ch: '≡' },
   BNB: { bg: 'linear-gradient(135deg,#f0b90b,#ffd666)', ch: '◆' },
+  XRP: { bg: 'linear-gradient(135deg,#23292f,#5b6670)', ch: '✕' },
+  DOGE: { bg: 'linear-gradient(135deg,#c2a633,#f2d56b)', ch: 'Ð' },
+  ADA: { bg: 'linear-gradient(135deg,#0033ad,#3b6fe0)', ch: '₳' },
+  AVAX: { bg: 'linear-gradient(135deg,#e84142,#ff7a7b)', ch: '▲' },
+  LINK: { bg: 'linear-gradient(135deg,#2a5ada,#6b8df0)', ch: '⬡' },
+  SHIB: { bg: 'linear-gradient(135deg,#ff5a1f,#ffa23a)', ch: 'S' },
+  ARB: { bg: 'linear-gradient(135deg,#213147,#28a0f0)', ch: '◈' },
+  POL: { bg: 'linear-gradient(135deg,#6c3fd6,#a77cff)', ch: '⬢' },
 }
 export function CoinIcon({ symbol, size = 32 }: { symbol: string; size?: number }) {
   const c = COIN[symbol] ?? { bg: '#5b4dff', ch: symbol[0] }

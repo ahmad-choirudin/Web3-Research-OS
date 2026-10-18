@@ -2,7 +2,23 @@ import { useEffect, useState } from 'react'
 
 export interface Coin { id: string; name: string; symbol: string; price: number; change: number; mcap: number; spark: number[]; chain: string }
 
-const META: Record<string, string> = { bitcoin: 'Bitcoin', ethereum: 'Ethereum', solana: 'Solana', binancecoin: 'BNB Chain' }
+// To add a coin, copy one line and edit it:
+// [CoinGecko id, symbol, name, chain, sample price, sample 24h %, sample market cap]
+const LIST: [string, string, string, string, number, number, number][] = [
+  ['bitcoin', 'BTC', 'Bitcoin', 'Bitcoin', 67842.32, 2.41, 1.33e12],
+  ['ethereum', 'ETH', 'Ethereum', 'Ethereum', 2621.17, 3.12, 315.4e9],
+  ['solana', 'SOL', 'Solana', 'Solana', 162.45, 4.87, 76.2e9],
+  ['binancecoin', 'BNB', 'BNB', 'BNB Chain', 593.21, 1.23, 86.7e9],
+  ['ripple', 'XRP', 'XRP', 'XRP Ledger', 2.41, 1.9, 138e9],
+  ['dogecoin', 'DOGE', 'Dogecoin', 'Dogecoin', 0.182, 5.6, 27e9],
+  ['cardano', 'ADA', 'Cardano', 'Cardano', 0.62, -0.8, 22e9],
+  ['avalanche-2', 'AVAX', 'Avalanche', 'Avalanche', 30.4, 2.2, 12.4e9],
+  ['chainlink', 'LINK', 'Chainlink', 'Ethereum', 15.2, 3.4, 9.6e9],
+  ['shiba-inu', 'SHIB', 'Shiba Inu', 'Ethereum', 0.0000145, 4.1, 8.5e9],
+  ['arbitrum', 'ARB', 'Arbitrum', 'Arbitrum', 0.55, -1.2, 2.4e9],
+  ['polygon-ecosystem-token', 'POL', 'Polygon', 'Polygon', 0.46, 1.5, 4.8e9],
+]
+const CHAIN: Record<string, string> = Object.fromEntries(LIST.map(l => [l[0], l[3]]))
 
 function wave(seed: number, up: boolean) {
   const a: number[] = []; let v = 50
@@ -10,12 +26,9 @@ function wave(seed: number, up: boolean) {
   return a
 }
 
-export const FALLBACK: Coin[] = [
-  { id: 'bitcoin', name: 'Bitcoin', symbol: 'BTC', price: 67842.32, change: 2.41, mcap: 1.33e12, spark: wave(1.3, true), chain: 'Bitcoin' },
-  { id: 'ethereum', name: 'Ethereum', symbol: 'ETH', price: 2621.17, change: 3.12, mcap: 315.4e9, spark: wave(2.1, true), chain: 'Ethereum' },
-  { id: 'solana', name: 'Solana', symbol: 'SOL', price: 162.45, change: 4.87, mcap: 76.2e9, spark: wave(0.9, true), chain: 'Solana' },
-  { id: 'binancecoin', name: 'BNB', symbol: 'BNB', price: 593.21, change: 1.23, mcap: 86.7e9, spark: wave(1.7, false), chain: 'BNB Chain' },
-]
+export const FALLBACK: Coin[] = LIST.map(([id, symbol, name, chain, price, change, mcap], i) => ({
+  id, name, symbol, price, change, mcap, chain, spark: wave(0.9 + (i % 6) * 0.37, change >= 0),
+}))
 
 export function useMarket() {
   const [coins, setCoins] = useState<Coin[]>(FALLBACK)
@@ -24,13 +37,14 @@ export function useMarket() {
     let dead = false
     const load = async () => {
       try {
-        const r = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,solana,binancecoin&order=market_cap_desc&sparkline=true')
+        const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + LIST.map(l => l[0]).join(',') + '&order=market_cap_desc&sparkline=true'
+        const r = await fetch(url)
         if (!r.ok) throw new Error(String(r.status))
         const d = await r.json() as Array<{ id: string; name: string; symbol: string; current_price: number; price_change_percentage_24h: number; market_cap: number; sparkline_in_7d?: { price: number[] } }>
-        if (dead) return
+        if (dead || !Array.isArray(d) || d.length === 0) return
         setCoins(d.map(c => ({
           id: c.id, name: c.name, symbol: c.symbol.toUpperCase(), price: c.current_price, change: c.price_change_percentage_24h ?? 0,
-          mcap: c.market_cap, spark: (c.sparkline_in_7d?.price ?? []).filter((_, i) => i % 7 === 0), chain: META[c.id] ?? c.name,
+          mcap: c.market_cap, spark: (c.sparkline_in_7d?.price ?? []).filter((_, i) => i % 7 === 0), chain: CHAIN[c.id] ?? c.name,
         })))
         setLive(true)
       } catch { if (!dead) setLive(false) }
@@ -42,6 +56,6 @@ export function useMarket() {
   return { coins, live }
 }
 
-export const usd = (n: number) => '$' + (n >= 1 ? n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : n.toPrecision(3))
-export const compact = (n: number) => n >= 1e12 ? `$${(n / 1e12).toFixed(2)}T` : n >= 1e9 ? `$${(n / 1e9).toFixed(1)}B` : `$${(n / 1e6).toFixed(0)}M`
-export const pct = (n: number) => `${n >= 0 ? '+' : ''}${n.toFixed(2)}%`
+export const usd = (n: number) => '$' + (n >= 1 ? n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : n >= 0.01 ? n.toFixed(4) : n.toFixed(8))
+export const compact = (n: number) => n >= 1e12 ? '$' + (n / 1e12).toFixed(2) + 'T' : n >= 1e9 ? '$' + (n / 1e9).toFixed(1) + 'B' : '$' + (n / 1e6).toFixed(0) + 'M'
+export const pct = (n: number) => (n >= 0 ? '+' : '') + n.toFixed(2) + '%'

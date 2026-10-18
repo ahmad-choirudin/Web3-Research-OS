@@ -25,6 +25,7 @@ function HeroImage() {
 
 export default function Dashboard({ coins, live, go }: { coins: Coin[]; live: boolean; go: Go }) {
   const [chain, setChain] = useState('All Chains')
+  const [showAll, setShowAll] = useState(false)
   const news = useNews()
   const h = new Date().getHours()
   const hi = h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening'
@@ -62,7 +63,7 @@ export default function Dashboard({ coins, live, go }: { coins: Coin[]; live: bo
             <div className="mt-3 hidden gap-2 overflow-x-auto md:flex">{CHAINS.map(c => <Chip key={c} active={chain === c} onClick={() => setChain(c)}>{c}</Chip>)}</div>
             <table className="mt-4 hidden w-full text-sm md:table">
               <thead className="text-left text-xs text-nx-soft"><tr><th className="py-2">#</th><th>Name</th><th className="text-right">Price</th><th className="text-right">24h %</th><th className="text-right">Market Cap</th><th className="pl-6 text-right">Chart</th></tr></thead>
-              <tbody>{rows.map((c, i) => (
+              <tbody>{(showAll ? rows : rows.slice(0, 6)).map((c, i) => (
                 <tr key={c.id} className="border-t border-nx-line/70">
                   <td className="py-3.5">{i + 1}</td>
                   <td><span className="flex items-center gap-3"><CoinIcon symbol={c.symbol} />{c.name} <span className="text-nx-soft">({c.symbol})</span></span></td>
@@ -71,8 +72,9 @@ export default function Dashboard({ coins, live, go }: { coins: Coin[]; live: bo
                 </tr>))}
               </tbody>
             </table>
+            {rows.length > 6 && <button onClick={() => setShowAll(v => !v)} className="mt-3 hidden text-xs text-nx-soft hover:text-white md:block">{showAll ? 'Show less' : 'Show all ' + rows.length}</button>}
             {rows.length === 0 && <p className="mt-4 hidden text-sm text-nx-soft md:block">No assets on this chain yet. Choose All Chains to see everything.</p>}
-            <ul className="mt-3 space-y-1 md:hidden">{coins.slice(0, 3).map(c => (
+            <ul className="mt-3 space-y-1 md:hidden">{coins.slice(0, 5).map(c => (
               <li key={c.id} className="flex items-center gap-3 border-t border-nx-line/70 py-3 first:border-0"><CoinIcon symbol={c.symbol} size={38} />
                 <div className="flex-1"><div className="font-medium">{c.name}</div><div className="text-xs text-nx-soft">{c.symbol}</div></div>
                 <div className="text-right"><div className="font-medium">{usd(c.price)}</div><div className="text-sm"><Change v={c.change} /></div></div></li>))}

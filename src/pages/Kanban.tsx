@@ -28,9 +28,9 @@ export default function Kanban({ go }: { go: Go }) {
     <div>
       <PageHeader title="Research Kanban" back={() => go('dashboard')} />
       <div className="mb-4 grid gap-2 md:grid-cols-[1fr_160px_auto]">
-        <input className={inputCls} placeholder="Topik riset baru" value={title} onChange={e => setTitle(e.target.value)} onKeyDown={e => e.key === 'Enter' && add()} aria-label="Topik riset" />
+        <input className={inputCls} placeholder="New research topic" value={title} onChange={e => setTitle(e.target.value)} onKeyDown={e => e.key === 'Enter' && add()} aria-label="Research topic" />
         <select className={inputCls} value={tag} onChange={e => setTag(e.target.value)} aria-label="Tag">{['DeFi', 'Solana', 'Layer 2', 'NFT', 'Web3'].map(t => <option key={t}>{t}</option>)}</select>
-        <button className={btnCls + ' flex items-center justify-center gap-1'} onClick={add}><Plus size={14} />Tambah kartu</button>
+        <button className={btnCls + ' flex items-center justify-center gap-1'} onClick={add}><Plus size={14} />Add card</button>
       </div>
       <div className="mb-4 flex gap-2 md:hidden">{COLS.map((c, i) => <Chip key={c} active={tab === i} onClick={() => setTab(i)}>{c} ({cards.filter(k => k.col === i).length})</Chip>)}</div>
       <div className="grid gap-4 md:grid-cols-3">
@@ -40,12 +40,12 @@ export default function Kanban({ go }: { go: Go }) {
             <div className="space-y-3">
               {cards.filter(k => k.col === i).map(k => (
                 <Card key={k.id} className="p-3">
-                  <div className="flex items-start justify-between gap-2"><div className="text-sm font-medium">{k.title}</div><button aria-label={`Hapus ${k.title}`} onClick={() => setCards(cards.filter(x => x.id !== k.id))} className="text-nx-soft hover:text-white"><X size={14} /></button></div>
+                  <div className="flex items-start justify-between gap-2"><div className="text-sm font-medium">{k.title}</div><button aria-label={`Delete ${k.title}`} onClick={() => setCards(cards.filter(x => x.id !== k.id))} className="text-nx-soft hover:text-white"><X size={14} /></button></div>
                   <span className="mt-2 inline-block rounded-md bg-nx-accent/30 px-2 py-0.5 text-[11px] text-cyan-100">{k.tag}</span>
                   <div className="mt-2 flex items-center justify-between text-xs text-nx-soft"><span>{k.date}</span>
-                    <button onClick={() => move(k.id)} className="flex items-center gap-1 rounded-lg border border-nx-line px-2 py-1 hover:text-white" aria-label={`Pindahkan ke ${COLS[(i + 1) % 3]}`}>{COLS[(i + 1) % 3]}<ChevronRight size={12} /></button></div>
+                    <button onClick={() => move(k.id)} className="flex items-center gap-1 rounded-lg border border-nx-line px-2 py-1 hover:text-white" aria-label={`Move to ${COLS[(i + 1) % 3]}`}>{COLS[(i + 1) % 3]}<ChevronRight size={12} /></button></div>
                 </Card>))}
-              {cards.every(k => k.col !== i) && <p className="text-sm text-nx-soft">Kolom kosong. Tambah kartu atau pindahkan dari kolom lain.</p>}
+              {cards.every(k => k.col !== i) && <p className="text-sm text-nx-soft">Empty column. Add a card or move one from another column.</p>}
             </div>
           </div>))}
       </div>

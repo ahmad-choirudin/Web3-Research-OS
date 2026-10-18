@@ -56,7 +56,7 @@ export function Header({ go, onSearch }: { go: Go; onSearch: (q: string) => void
       <header className="hidden items-center gap-4 lg:flex">
         <div className="relative flex-1">
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-nx-soft" />
-          <input ref={ref} value={q} onChange={e => setQ(e.target.value)} onKeyDown={e => e.key === 'Enter' && submit()} placeholder="Search protocols, wallets, reports…" aria-label="Cari"
+          <input ref={ref} value={q} onChange={e => setQ(e.target.value)} onKeyDown={e => e.key === 'Enter' && submit()} placeholder="Search protocols, wallets, reports…" aria-label="Search"
             className="w-full rounded-xl border border-nx-line bg-nx-card/50 py-2.5 pl-9 pr-10 text-sm placeholder:text-nx-soft/70 focus:border-nx-accent" />
           <kbd className="absolute right-3 top-1/2 -translate-y-1/2 rounded border border-nx-line px-1.5 text-xs text-nx-soft">/</kbd>
         </div>

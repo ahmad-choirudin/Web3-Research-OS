@@ -20,15 +20,15 @@ export default function Wallets({ go }: { go: Go }) {
   const [err, setErr] = useState('')
   const shown = list.filter(w => w.addr.toLowerCase().includes(q.toLowerCase()) || w.label.toLowerCase().includes(q.toLowerCase()))
   const add = () => {
-    if (!/^0x[a-fA-F0-9]{40}$/.test(q.trim())) { setErr('Masukkan alamat EVM lengkap: 0x diikuti 40 karakter heksadesimal.'); return }
-    if (list.some(w => w.addr.toLowerCase() === q.trim().toLowerCase())) { setErr('Alamat ini sudah ada di daftar.'); return }
-    setList([{ addr: q.trim(), label: label.trim() || 'Wallet baru', value: null, change: null }, ...list]); setQ(''); setLabel(''); setErr('')
+    if (!/^0x[a-fA-F0-9]{40}$/.test(q.trim())) { setErr('Enter a full EVM address: 0x followed by 40 hex characters.'); return }
+    if (list.some(w => w.addr.toLowerCase() === q.trim().toLowerCase())) { setErr('This address is already in the list.'); return }
+    setList([{ addr: q.trim(), label: label.trim() || 'New wallet', value: null, change: null }, ...list]); setQ(''); setLabel(''); setErr('')
   }
   return (
     <div>
       <PageHeader title="Wallet Tracker" back={() => go('dashboard')} />
-      <div className="relative mb-2"><Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-nx-soft" /><input className={inputCls + ' pl-9'} placeholder="Search wallet address…" value={q} onChange={e => { setQ(e.target.value); setErr('') }} aria-label="Cari alamat wallet" /></div>
-      <div className="mb-2 grid grid-cols-[1fr_auto] gap-2"><input className={inputCls} placeholder="Label (opsional)" value={label} onChange={e => setLabel(e.target.value)} aria-label="Label wallet" /><button className={btnCls} onClick={add}>Tambah wallet</button></div>
+      <div className="relative mb-2"><Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-nx-soft" /><input className={inputCls + ' pl-9'} placeholder="Search wallet address…" value={q} onChange={e => { setQ(e.target.value); setErr('') }} aria-label="Search wallet address" /></div>
+      <div className="mb-2 grid grid-cols-[1fr_auto] gap-2"><input className={inputCls} placeholder="Label (optional)" value={label} onChange={e => setLabel(e.target.value)} aria-label="Wallet label" /><button className={btnCls} onClick={add}>Add wallet</button></div>
       {err && <p className="mb-2 text-sm text-nx-down" role="alert">{err}</p>}
       <h2 className="mb-2 mt-4 text-sm text-nx-soft">Recent</h2>
       <Card className="divide-y divide-nx-line/70">
@@ -36,13 +36,13 @@ export default function Wallets({ go }: { go: Go }) {
           <div key={w.addr} className="flex items-center gap-3 p-4">
             <span className="grid h-10 w-10 place-items-center rounded-full bg-nx-accent/30 text-cyan-200"><W size={18} /></span>
             <div className="flex-1"><div className="font-mono text-sm">{short(w.addr)}</div><div className="text-xs text-nx-soft">{w.label}</div></div>
-            <div className="text-right"><div className="font-medium">{w.value === null ? '–' : '$' + w.value.toLocaleString()}</div><div className="text-xs">{w.change === null ? <span className="text-nx-soft">belum ada data</span> : <Change v={w.change} />}</div></div>
-            <button aria-label="Hapus wallet" onClick={() => setList(list.filter(x => x.addr !== w.addr))} className="text-nx-soft hover:text-white"><X size={16} /></button>
+            <div className="text-right"><div className="font-medium">{w.value === null ? '–' : '$' + w.value.toLocaleString()}</div><div className="text-xs">{w.change === null ? <span className="text-nx-soft">no data yet</span> : <Change v={w.change} />}</div></div>
+            <button aria-label="Delete wallet" onClick={() => setList(list.filter(x => x.addr !== w.addr))} className="text-nx-soft hover:text-white"><X size={16} /></button>
           </div>
         ))}
-        {shown.length === 0 && <p className="p-4 text-sm text-nx-soft">Tidak ada wallet yang cocok. Tempel alamat lengkap lalu klik Tambah wallet.</p>}
+        {shown.length === 0 && <p className="p-4 text-sm text-nx-soft">No matching wallets. Paste a full address, then click Add wallet.</p>}
       </Card>
-      <p className="mt-3 text-xs text-nx-soft/60">Saldo contoh bersifat statis. Untuk saldo nyata, sambungkan API explorer (Etherscan, Alchemy, dsb.).</p>
+      <p className="mt-3 text-xs text-nx-soft/60">Sample balances are static. For real balances, connect an explorer API (Etherscan, Alchemy, etc.).</p>
     </div>
   )
 }

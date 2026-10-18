@@ -36,7 +36,7 @@ export function CoinIcon({ symbol, size = 32 }: { symbol: string; size?: number 
 export const PageHeader = ({ title, back, action }: { title: string; back?: () => void; action?: ReactNode }) => (
   <div className="mb-4 flex items-center justify-between gap-3">
     <div className="flex items-center gap-2">
-      {back && <button onClick={back} aria-label="Kembali" className="rounded-lg p-1 text-nx-soft hover:text-white lg:hidden"><ChevronLeft size={20} /></button>}
+      {back && <button onClick={back} aria-label="Back" className="rounded-lg p-1 text-nx-soft hover:text-white lg:hidden"><ChevronLeft size={20} /></button>}
       <h1 className="text-xl font-bold md:text-2xl">{title}</h1>
     </div>
     {action}

@@ -25,12 +25,12 @@ export default function Library({ go }: { go: Go }) {
   return (
     <div>
       <PageHeader title="Research Library" back={() => go('dashboard')} action={<button className={btnCls + ' flex items-center gap-1'} onClick={() => setOpen(o => !o)}><Plus size={14} />New Note</button>} />
-      <p className="mb-4 -mt-2 text-sm text-nx-soft">Simpan catatan, laporan, dan referensi riset.</p>
+      <p className="mb-4 -mt-2 text-sm text-nx-soft">Save notes, reports, and research references.</p>
       {open && (
         <Card className="mb-4 grid gap-2 p-4 md:grid-cols-[1fr_160px_auto]">
-          <input className={inputCls} placeholder="Judul catatan" value={title} onChange={e => setTitle(e.target.value)} onKeyDown={e => e.key === 'Enter' && add()} aria-label="Judul catatan" />
+          <input className={inputCls} placeholder="Note title" value={title} onChange={e => setTitle(e.target.value)} onKeyDown={e => e.key === 'Enter' && add()} aria-label="Note title" />
           <select className={inputCls} value={nt} onChange={e => setNt(e.target.value)} aria-label="Tag">{TAGS.map(t => <option key={t}>{t}</option>)}</select>
-          <button className={btnCls} onClick={add}>Simpan catatan</button>
+          <button className={btnCls} onClick={add}>Save note</button>
         </Card>
       )}
       <div className="mb-4 flex gap-2 overflow-x-auto">{['All', ...TAGS].map(t => <Chip key={t} active={tag === t} onClick={() => setTag(t)}>{t}</Chip>)}</div>
@@ -39,10 +39,10 @@ export default function Library({ go }: { go: Go }) {
           <Card key={n.id} className="flex items-center gap-3 p-3">
             <span className="grid h-14 w-16 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-nx-accent/50 to-purple-900/50 text-cyan-100"><BookOpen size={20} /></span>
             <div className="min-w-0 flex-1"><div className="truncate font-medium">{n.title}</div><div className="text-xs text-nx-soft">Updated {timeAgo(n.updated)} · {n.tag}</div></div>
-            <button aria-label={`Hapus ${n.title}`} onClick={() => setNotes(notes.filter(x => x.id !== n.id))} className="text-nx-soft hover:text-white"><X size={16} /></button>
+            <button aria-label={`Delete ${n.title}`} onClick={() => setNotes(notes.filter(x => x.id !== n.id))} className="text-nx-soft hover:text-white"><X size={16} /></button>
           </Card>
         ))}
-        {list.length === 0 && <p className="text-sm text-nx-soft">Belum ada catatan di kategori ini. Klik New Note untuk menulis yang pertama.</p>}
+        {list.length === 0 && <p className="text-sm text-nx-soft">No notes in this category yet. Click New Note to write your first one.</p>}
       </div>
     </div>
   )

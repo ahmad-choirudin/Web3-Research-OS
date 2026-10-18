@@ -71,7 +71,7 @@ export default function Dashboard({ coins, live, go }: { coins: Coin[]; live: bo
                 </tr>))}
               </tbody>
             </table>
-            {rows.length === 0 && <p className="mt-4 hidden text-sm text-nx-soft md:block">Belum ada aset di chain ini. Pilih All Chains untuk melihat semuanya.</p>}
+            {rows.length === 0 && <p className="mt-4 hidden text-sm text-nx-soft md:block">No assets on this chain yet. Choose All Chains to see everything.</p>}
             <ul className="mt-3 space-y-1 md:hidden">{coins.slice(0, 3).map(c => (
               <li key={c.id} className="flex items-center gap-3 border-t border-nx-line/70 py-3 first:border-0"><CoinIcon symbol={c.symbol} size={38} />
                 <div className="flex-1"><div className="font-medium">{c.name}</div><div className="text-xs text-nx-soft">{c.symbol}</div></div>
@@ -101,7 +101,7 @@ export default function Dashboard({ coins, live, go }: { coins: Coin[]; live: bo
               </a>
             </li>))}
           </ul>
-          <p className="mt-1 text-[11px] text-nx-soft/60">{news.live ? 'Sumber: CryptoCompare News' : 'Berita contoh (API tidak terjangkau).'}</p>
+          <p className="mt-1 text-[11px] text-nx-soft/60">{news.live ? 'Source: CryptoCompare News' : 'Sample news (API unreachable).'}</p>
         </Card>
       </div>
     </div>

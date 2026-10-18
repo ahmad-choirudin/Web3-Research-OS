@@ -30,7 +30,7 @@ export default function Protocols({ go, query, setQuery }: { go: Go; query: stri
   return (
     <div>
       <PageHeader title="Protocol Explorer" back={() => go('dashboard')} action={<span className="text-xs text-nx-soft">{live ? 'Live · DefiLlama' : 'Sample data'}</span>} />
-      <div className="relative mb-3"><Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-nx-soft" /><input className={inputCls + ' pl-9'} placeholder="Search protocol…" value={query} onChange={e => setQuery(e.target.value)} aria-label="Cari protokol" /></div>
+      <div className="relative mb-3"><Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-nx-soft" /><input className={inputCls + ' pl-9'} placeholder="Search protocol…" value={query} onChange={e => setQuery(e.target.value)} aria-label="Search protocols" /></div>
       <div className="mb-4 flex gap-2 overflow-x-auto">{CHAINS.map(c => <Chip key={c} active={chain === c} onClick={() => setChain(c)}>{c}</Chip>)}</div>
       <Card className="divide-y divide-nx-line/70">
         {list.map(p => (
@@ -40,7 +40,7 @@ export default function Protocols({ go, query, setQuery }: { go: Go; query: stri
             <div className="text-right"><div className="font-medium">{compact(p.tvl)}</div><div className="text-xs"><Change v={p.change} /></div></div>
           </div>
         ))}
-        {list.length === 0 && <p className="p-4 text-sm text-nx-soft">Tidak ada protokol yang cocok. Coba kata kunci lain atau pilih All.</p>}
+        {list.length === 0 && <p className="p-4 text-sm text-nx-soft">No matching protocols. Try another keyword or choose All.</p>}
       </Card>
     </div>
   )

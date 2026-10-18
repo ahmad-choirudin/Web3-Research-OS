@@ -17,7 +17,7 @@ export async function askClaude({ apiKey, proxy, system, messages }: Opts): Prom
   if (!r.ok) {
     let m = ''
     try { m = ((await r.json()) as { error?: { message?: string } }).error?.message ?? '' } catch { /* bukan JSON */ }
-    throw new Error(r.status === 401 ? 'API key tidak valid. Periksa di Settings.' : m || `Permintaan gagal (${r.status}).`)
+    throw new Error(r.status === 401 ? 'Invalid API key. Check it in Settings.' : m || `Request failed (${r.status}).`)
   }
   const d = await r.json() as { content: Array<{ type: string; text?: string }> }
   return d.content.filter(b => b.type === 'text').map(b => b.text ?? '').join('\n').trim()

@@ -51,7 +51,7 @@ export default function Dashboard({ coins, live, go }: { coins: Coin[]; live: bo
             {STATS.map(({ k, m, v, d, Icon }) => (
               <div key={k} className="rounded-xl border border-nx-line bg-nx-panel/70 p-3">
                 <div className="flex items-center gap-2 text-xs text-nx-soft"><span className="grid h-7 w-7 place-items-center rounded-lg bg-nx-accent/25 text-nx-glow"><Icon size={14} /></span><span className="md:hidden">{m}</span><span className="hidden md:inline">{k}</span></div>
-                <div className="mt-2 flex items-end justify-between gap-1"><span className="text-xl font-semibold md:text-2xl">{v}</span><span className="text-[11px] text-nx-up">{d}</span></div>
+                <div className="mt-2 flex flex-wrap items-end justify-between gap-x-2"><span className="text-xl font-semibold md:text-2xl">{v}</span><span className="text-[11px] text-nx-up">{d}</span></div>
               </div>
             ))}
           </div>

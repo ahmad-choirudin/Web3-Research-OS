@@ -5,8 +5,8 @@
 html, body, #root { min-height: 100%; }
 body {
   margin: 0;
-  background-color: #050a14;
-  background-image: radial-gradient(1000px 500px at 75% -10%, #0c2d4f, transparent 60%);
+  background-color: #000000;
+  background-image: radial-gradient(1000px 500px at 75% -10%, #0b1f26, transparent 60%);
   background-attachment: fixed;
   color: #e6e8ff;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -15,4 +15,4 @@ body {
 input, textarea, select { outline: none; }
 :focus-visible { outline: 2px solid #22d3ee; outline-offset: 2px; }
 ::-webkit-scrollbar { width: 6px; height: 6px }
-::-webkit-scrollbar-thumb { background: #1c3556; border-radius: 6px }
+::-webkit-scrollbar-thumb { background: #262626; border-radius: 6px }

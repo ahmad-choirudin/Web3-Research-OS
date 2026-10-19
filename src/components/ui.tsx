@@ -17,7 +17,7 @@ export function Sparkline({ data, up = true, className = 'h-8 w-24' }: { data: n
   const pts = data.map((v, i) => `${(i / (data.length - 1)) * 100},${30 - ((v - min) / r) * 28}`).join(' ')
   return (
     <svg viewBox="0 0 100 32" preserveAspectRatio="none" className={className} aria-hidden>
-      <polyline points={pts} fill="none" stroke={up ? '#2ff3c8' : '#ff5c4d'} strokeWidth="1.6" vectorEffect="non-scaling-stroke" />
+      <polyline points={pts} fill="none" stroke={up ? '#5fe3a1' : '#ff6b6b'} strokeWidth="1.6" vectorEffect="non-scaling-stroke" />
     </svg>
   )
 }

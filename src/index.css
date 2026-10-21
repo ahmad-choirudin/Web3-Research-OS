@@ -5,18 +5,14 @@
 html, body, #root { min-height: 100%; }
 body {
   margin: 0;
-  background-color: #080a09;
-  background-image: radial-gradient(900px 480px at 12% -8%, #12382a, transparent 60%);
+  background-color: #000;
+  background-image: radial-gradient(900px 480px at 15% -10%, #0e1a46, transparent 60%), radial-gradient(700px 400px at 100% 0%, #1b0f3d, transparent 60%);
   background-attachment: fixed;
-  color: #e9eeeb;
+  color: #eceef5;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 input, textarea, select { outline: none; }
-:focus-visible { outline: 2px solid #6ee7b7; outline-offset: 2px; }
+:focus-visible { outline: 2px solid #3d6bff; outline-offset: 2px; }
 ::-webkit-scrollbar { width: 6px; height: 6px }
-::-webkit-scrollbar-thumb { background: #242a27; border-radius: 6px }
-
-@media (min-width: 768px) {
-  .hero-img { -webkit-mask-image: linear-gradient(to right, transparent, #000 45%); mask-image: linear-gradient(to right, transparent, #000 45%); }
-}
+::-webkit-scrollbar-thumb { background: #212228; border-radius: 6px }

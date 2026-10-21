@@ -1,7 +1,7 @@
 import WalletButton from './WalletButton'
 import { useEffect, useRef, useState } from 'react'
 import type { LucideIcon } from 'lucide-react'
-import { BarChart3, Bell, BookOpen, Bot, Columns3, Compass, Box, Home, LayoutDashboard, MoreHorizontal, Moon, Search, Settings, Wallet } from 'lucide-react'
+import { BarChart3, Bell, BookOpen, Bot, Columns3, Compass, Home, LayoutDashboard, MoreHorizontal, Moon, Search, Settings, Wallet } from 'lucide-react'
 import type { Go, Page } from '../lib/types'
 
 export const NAV: { id: Page; label: string; Icon: LucideIcon }[] = [
@@ -17,7 +17,7 @@ export const NAV: { id: Page; label: string; Icon: LucideIcon }[] = [
 
 export const Logo = ({ small, iconOnly }: { small?: boolean; iconOnly?: boolean }) => (
   <div className="flex items-center gap-3">
-    <span className="grid place-items-center rounded-xl bg-gradient-to-br from-nx-accent to-nx-alt text-white" style={{ width: small ? 36 : 40, height: small ? 36 : 40 }}><Box size={small ? 18 : 22} /></span>
+    <img src={import.meta.env.BASE_URL + 'logo.png'} alt="CUBBIE" className="object-contain" style={{ width: small ? 36 : 40, height: small ? 36 : 40 }} />
     {!iconOnly && <div className="leading-tight"><div className={`font-bold tracking-wide ${small ? 'text-base' : 'text-xl'}`}>CUBBIE</div><div className="text-[11px] text-nx-soft">Web3 Research OS</div></div>}
   </div>
 )

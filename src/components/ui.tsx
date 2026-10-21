@@ -2,11 +2,11 @@ import type { ReactNode } from 'react'
 import { ChevronLeft } from 'lucide-react'
 
 export const Card = ({ className = '', children }: { className?: string; children: ReactNode }) => (
-  <div className={`rounded-2xl border border-nx-line bg-nx-card/55 backdrop-blur ${className}`}>{children}</div>
+  <div className={`rounded-3xl border border-white/[0.07] bg-gradient-to-b from-white/[0.05] to-white/[0.01] bg-nx-card/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur ${className}`}>{children}</div>
 )
 
 export const Chip = ({ active, onClick, children }: { active?: boolean; onClick?: () => void; children: ReactNode }) => (
-  <button onClick={onClick} className={`whitespace-nowrap rounded-full border px-3 py-1 text-xs transition ${active ? 'border-nx-accent bg-nx-accent/30 text-white' : 'border-nx-line text-nx-soft hover:text-white'}`}>{children}</button>
+  <button onClick={onClick} className={`whitespace-nowrap rounded-full border px-3.5 py-1 text-xs font-medium transition ${active ? 'border-transparent bg-nx-lime text-black' : 'border-white/10 text-nx-soft hover:text-white'}`}>{children}</button>
 )
 
 export const Change = ({ v }: { v: number }) => <span className={v >= 0 ? 'text-nx-up' : 'text-nx-down'}>{v >= 0 ? '+' : ''}{v.toFixed(2)}%</span>
@@ -17,7 +17,7 @@ export function Sparkline({ data, up = true, className = 'h-8 w-24' }: { data: n
   const pts = data.map((v, i) => `${(i / (data.length - 1)) * 100},${30 - ((v - min) / r) * 28}`).join(' ')
   return (
     <svg viewBox="0 0 100 32" preserveAspectRatio="none" className={className} aria-hidden>
-      <polyline points={pts} fill="none" stroke={up ? '#5fe3a1' : '#ff6b6b'} strokeWidth="1.6" vectorEffect="non-scaling-stroke" />
+      <polyline points={pts} fill="none" stroke={up ? '#4ade80' : '#ff5d5d'} strokeWidth="1.6" vectorEffect="non-scaling-stroke" />
     </svg>
   )
 }
@@ -52,4 +52,4 @@ export const PageHeader = ({ title, back, action }: { title: string; back?: () =
 )
 
 export const inputCls = 'w-full rounded-xl border border-nx-line bg-nx-panel/80 px-3 py-2 text-sm text-white placeholder:text-nx-soft/60 focus:border-nx-accent'
-export const btnCls = 'rounded-xl bg-nx-accent px-4 py-2 text-sm font-medium text-black transition hover:bg-nx-hover'
+export const btnCls = 'rounded-xl bg-nx-accent px-4 py-2 text-sm font-medium text-white transition hover:bg-nx-hover'

@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { ExternalLink } from 'lucide-react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Card, Change, Chip, CoinIcon, PageHeader } from '../components/ui'
 import { compact, usd, type Coin } from '../lib/market'
 import type { Go } from '../lib/types'
@@ -24,8 +24,8 @@ function sample(c: Coin): Pt[] {
   return c.spark.map((v, i): Pt => [now - ((n - 1 - i) * 7 * 86400000) / (n - 1), (v * c.price) / last])
 }
 
-function Chart({ pts, hover, setHover, up }: { pts: Pt[]; hover: number | null; setHover: (i: number | null) => void; up: boolean }) {
-  const W = 600, H = 240, P = 10, n = pts.length
+function Chart({ pts, hover, setHover, tip }: { pts: Pt[]; hover: number | null; setHover: (i: number | null) => void; tip: string }) {
+  const W = 600, H = 240, P = 24, n = pts.length
   const vals = pts.map(p => p[1])
   const min = Math.min(...vals), max = Math.max(...vals), r = max - min || 1
   const px = (i: number) => (i / (n - 1)) * W
@@ -36,8 +36,8 @@ function Chart({ pts, hover, setHover, up }: { pts: Pt[]; hover: number | null; 
   const top = (py(pts[at][1]) / H) * 100
   return (
     <div
-      className={'relative touch-pan-y select-none ' + (up ? 'text-nx-up' : 'text-nx-down')}
-      style={{ aspectRatio: '600 / 240' }}
+      className="relative touch-pan-y select-none text-white"
+      style={{ aspectRatio: '600 / 280' }}
       onPointerMove={e => {
         const b = e.currentTarget.getBoundingClientRect()
         const k = Math.round(((e.clientX - b.left) / b.width) * (n - 1))
@@ -48,23 +48,24 @@ function Chart({ pts, hover, setHover, up }: { pts: Pt[]; hover: number | null; 
       <svg viewBox={'0 0 ' + W + ' ' + H} preserveAspectRatio="none" className="h-full w-full" aria-hidden>
         <defs>
           <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="currentColor" stopOpacity=".28" />
+            <stop offset="0" stopColor="currentColor" stopOpacity=".22" />
             <stop offset="1" stopColor="currentColor" stopOpacity="0" />
           </linearGradient>
         </defs>
         <path d={line + ' L' + W + ',' + H + ' L0,' + H + ' Z'} fill="url(#cg)" />
-        <path d={line} fill="none" stroke="currentColor" strokeWidth="2" vectorEffect="non-scaling-stroke" />
+        <path d={line} fill="none" stroke="currentColor" strokeWidth="2.5" vectorEffect="non-scaling-stroke" />
       </svg>
-      <span className="absolute left-2 top-1 text-[11px] text-nx-soft">{usd(max)}</span>
-      <span className="absolute bottom-1 left-2 text-[11px] text-nx-soft">{usd(min)}</span>
-      {hover !== null && <span className="pointer-events-none absolute inset-y-0 w-px bg-current opacity-40" style={{ left: left + '%' }} />}
-      <span className="pointer-events-none absolute h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-nx-bg bg-current" style={{ left: left + '%', top: top + '%' }} />
+      <span className="absolute left-0 top-0 text-[11px] text-white/70">{usd(max)}</span>
+      <span className="absolute bottom-0 left-0 text-[11px] text-white/70">{usd(min)}</span>
+      <span className="pointer-events-none absolute inset-y-0 w-px bg-gradient-to-b from-white to-transparent" style={{ left: left + '%' }} />
+      <span className="pointer-events-none absolute -translate-x-1/2 whitespace-nowrap rounded-lg bg-black px-2.5 py-1.5 text-xs font-semibold shadow-lg" style={{ left: Math.max(14, Math.min(86, left)) + '%', top: 0 }}>{tip}</span>
+      <span className="pointer-events-none absolute h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-black bg-white shadow-[0_0_14px_rgba(255,255,255,.9)]" style={{ left: left + '%', top: top + '%' }} />
     </div>
   )
 }
 
 const Stat = ({ k, children }: { k: string; children: ReactNode }) => (
-  <Card className="p-3"><div className="text-xs text-nx-soft">{k}</div><div className="mt-1 text-lg font-semibold">{children}</div></Card>
+  <div className="rounded-2xl border border-white/[0.07] bg-black/30 p-3"><div className="text-[11px] text-nx-soft">{k}</div><div className="mt-1 text-base font-semibold">{children}</div></div>
 )
 
 export default function CoinDetail({ coins, go }: { coins: Coin[]; go: Go }) {
@@ -116,36 +117,59 @@ export default function CoinDetail({ coins, go }: { coins: Coin[]; go: Go }) {
   const hi = data.length ? Math.max(...data.map(p => p[1])) : coin.price
   const lo = data.length ? Math.min(...data.map(p => p[1])) : coin.price
   const when = (t: number) => new Date(t).toLocaleString('en-US', days <= 7 ? { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' } : { month: 'short', day: 'numeric', year: 'numeric' })
+  const tip = data.length ? usd(shown) + (hover !== null ? ' · ' + when(data[idx][0]) : '') : ''
+  const others = coins.filter(c => c.id !== id).slice(0, 6)
 
   return (
     <div>
       <PageHeader title={coin.name} back={() => go('dashboard')} action={<span className="text-xs text-nx-soft">{live ? 'Live · CoinGecko' : 'Sample chart'}</span>} />
-      <Card className="p-5">
-        <div className="flex items-center gap-3">
-          <CoinIcon symbol={coin.symbol} size={44} />
-          <div>
-            <div className="text-2xl font-bold">{usd(shown)}</div>
-            <div className="text-sm text-nx-soft">
-              {hover !== null && data.length ? when(data[idx][0]) : <><Change v={periodChange} /> over {label}</>}
+      <div className="grid gap-5 lg:grid-cols-[1.7fr_1fr]">
+        <div className="relative overflow-hidden rounded-3xl p-5 md:p-6" style={{ background: 'radial-gradient(500px 300px at 100% 0%, rgba(255,138,76,.55), transparent 60%), linear-gradient(160deg,#2a1f66,#5b3fc4 60%,#3b2a8c)' }}>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <CoinIcon symbol={coin.symbol} size={44} />
+              <div>
+                <div className="text-sm text-white/70">{coin.name} (USD)</div>
+                <div className="text-3xl font-bold md:text-4xl">{usd(shown)}</div>
+              </div>
             </div>
+            <span className="rounded-full bg-black/30 px-3 py-1 text-sm"><Change v={periodChange} /> <span className="text-white/70">{label}</span></span>
+          </div>
+          <div className="mt-4 flex gap-2 overflow-x-auto">
+            {RANGES.map(([l, d]) => <Chip key={l} active={days === d} onClick={() => setDays(d)}>{l}</Chip>)}
+          </div>
+          <div className="mt-6">
+            {data.length >= 2
+              ? <Chart pts={data} hover={hover} setHover={setHover} tip={tip} />
+              : <div className="grid animate-pulse place-items-center text-sm text-white/70" style={{ aspectRatio: '600 / 280' }}>Loading chart…</div>}
           </div>
         </div>
-        <div className="mt-4 flex gap-2 overflow-x-auto">
-          {RANGES.map(([l, d]) => <Chip key={l} active={days === d} onClick={() => setDays(d)}>{l}</Chip>)}
-        </div>
-        <div className="mt-4">
-          {data.length >= 2
-            ? <Chart pts={data} hover={hover} setHover={setHover} up={periodChange >= 0} />
-            : <div className="grid animate-pulse place-items-center text-sm text-nx-soft" style={{ aspectRatio: '600 / 240' }}>Loading chart…</div>}
-        </div>
-      </Card>
-      <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
-        <Stat k="Market cap">{compact(coin.mcap)}</Stat>
-        <Stat k="24h change"><Change v={coin.change} /></Stat>
-        <Stat k={label + ' high'}>{usd(hi)}</Stat>
-        <Stat k={label + ' low'}>{usd(lo)}</Stat>
+
+        <Card className="space-y-4 p-5">
+          <div className="rounded-2xl border border-white/[0.07] bg-black/30 p-4">
+            <div className="text-xs text-nx-soft">Change over {label}</div>
+            <div className="mt-1 text-2xl font-semibold">{(last - first >= 0 ? '+' : '-') + usd(Math.abs(last - first))}</div>
+            <div className="text-sm"><Change v={periodChange} /></div>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <Stat k="Market cap">{compact(coin.mcap)}</Stat>
+            <Stat k="24h change"><Change v={coin.change} /></Stat>
+            <Stat k={label + ' high'}>{usd(hi)}</Stat>
+            <Stat k={label + ' low'}>{usd(lo)}</Stat>
+          </div>
+          <div>
+            <div className="mb-2 text-sm font-semibold">Other coins</div>
+            <div className="grid grid-cols-2 gap-2">
+              {others.map(c => (
+                <Link key={c.id} to={'/coin/' + c.id} className="rounded-2xl border border-white/[0.07] bg-black/30 p-3 transition hover:border-nx-accent">
+                  <div className="flex items-center gap-2"><CoinIcon symbol={c.symbol} size={26} /><span className="text-sm font-medium">{c.symbol}</span></div>
+                  <div className="mt-2 text-sm">{usd(c.price)}</div><div className="text-xs"><Change v={c.change} /></div>
+                </Link>))}
+            </div>
+          </div>
+          <a href={'https://www.coingecko.com/en/coins/' + id} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-nx-soft hover:text-white">View on CoinGecko <ExternalLink size={12} /></a>
+        </Card>
       </div>
-      <a href={'https://www.coingecko.com/en/coins/' + id} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1 text-xs text-nx-soft hover:text-white">View on CoinGecko <ExternalLink size={12} /></a>
     </div>
   )
 }

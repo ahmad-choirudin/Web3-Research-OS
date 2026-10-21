@@ -6,6 +6,7 @@ import { timeAgo } from '../lib/store'
 import { Card, Change, Chip, CoinIcon, Sparkline } from '../components/ui'
 import { compact, usd, type Coin } from '../lib/market'
 import type { Go } from '../lib/types'
+import BalanceChart from '../components/BalanceChart'
 
 const CHAINS = ['All Chains', 'Ethereum', 'BNB Chain', 'Solana', 'Arbitrum', 'Polygon']
 const STATS = [
@@ -26,13 +27,6 @@ function Area({ data }: { data: number[] }) {
     </svg>
   )
 }
-
-const Orb = () => (
-  <div className="relative mt-4 h-44 overflow-hidden rounded-2xl border border-white/[0.07] bg-[#050b24]">
-    <div className="absolute left-1/2 top-10 h-56 w-56 -translate-x-1/2 rounded-full"
-      style={{ background: 'repeating-conic-gradient(from 0deg, rgba(255,255,255,.22) 0 5deg, transparent 5deg 15deg), radial-gradient(circle at 35% 30%, #7aa2ff, #1d3fd8 55%, #0a1450)', boxShadow: '0 0 60px rgba(61,107,255,.5)' }} />
-  </div>
-)
 
 export default function Dashboard({ coins, live, go }: { coins: Coin[]; live: boolean; go: Go }) {
   const [chain, setChain] = useState('All Chains')
@@ -82,7 +76,7 @@ export default function Dashboard({ coins, live, go }: { coins: Coin[]; live: bo
             <div className="text-4xl font-semibold"><span className="text-nx-accent">$</span> 2,431.56</div>
             <div className="text-right text-xs text-nx-soft">vs last month<div className="text-sm text-nx-up">+3.2%</div></div>
           </div>
-          <Orb />
+          <BalanceChart />
           <div className="mt-3 flex items-center gap-2 text-xs text-nx-soft"><Wallet size={14} />Connect a wallet to track real balances</div>
         </Card>
 

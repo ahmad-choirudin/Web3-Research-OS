@@ -15,30 +15,25 @@ export const NAV: { id: Page; label: string; Icon: LucideIcon }[] = [
   { id: 'settings', label: 'Settings', Icon: Settings },
 ]
 
-export const Logo = ({ small }: { small?: boolean }) => (
+export const Logo = ({ small, iconOnly }: { small?: boolean; iconOnly?: boolean }) => (
   <div className="flex items-center gap-3">
-    <span className="grid place-items-center rounded-xl bg-gradient-to-br from-nx-accent to-nx-alt text-black" style={{ width: small ? 34 : 40, height: small ? 34 : 40 }}><Box size={small ? 18 : 22} /></span>
-    <div className="leading-tight"><div className={`font-bold tracking-wide ${small ? 'text-base' : 'text-xl'}`}>CUBBIE</div><div className="text-[11px] text-nx-soft">Web3 Research OS</div></div>
+    <span className="grid place-items-center rounded-xl bg-gradient-to-br from-nx-accent to-nx-alt text-white" style={{ width: small ? 36 : 40, height: small ? 36 : 40 }}><Box size={small ? 18 : 22} /></span>
+    {!iconOnly && <div className="leading-tight"><div className={`font-bold tracking-wide ${small ? 'text-base' : 'text-xl'}`}>CUBBIE</div><div className="text-[11px] text-nx-soft">Web3 Research OS</div></div>}
   </div>
 )
 
-const Avatar = () => <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-amber-300 to-orange-500 text-sm font-bold text-nx-bg">A</span>
+const Avatar = () => <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-nx-alt to-nx-orange text-sm font-bold text-white">A</span>
 
 export function Sidebar({ page, go }: { page: Page; go: Go }) {
+  const btn = (id: Page, label: string, Icon: LucideIcon) => (
+    <button key={id} title={label} aria-label={label} onClick={() => go(id)} className={`grid h-11 w-11 place-items-center rounded-xl transition ${page === id ? 'bg-white/10 text-white' : 'text-nx-soft hover:bg-white/5 hover:text-white'}`}><Icon size={19} /></button>
+  )
+  const st = NAV[NAV.length - 1]
   return (
-    <aside className="sticky top-0 hidden h-screen flex-col border-r border-nx-line bg-nx-bg/60 p-5 lg:flex">
-      <Logo />
-      <nav className="mt-8 flex flex-col gap-1">
-        {NAV.map(({ id, label, Icon }) => (
-          <button key={id} onClick={() => go(id)} className={`flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm transition ${page === id ? 'bg-nx-accent/30 text-white' : 'text-nx-soft hover:bg-nx-accent/10 hover:text-white'}`}>
-            <Icon size={18} />{label}
-          </button>
-        ))}
-      </nav>
-      <div className="mt-auto rounded-2xl border border-nx-line bg-gradient-to-br from-nx-accent/30 to-nx-alt/30 p-4">
-        <div className="font-semibold leading-snug">Build better<br />Web3 insights.</div>
-        <div className="mt-3 text-xs text-nx-soft">Research · Analyze · Grow</div>
-      </div>
+    <aside className="sticky top-0 hidden h-screen flex-col items-center border-r border-white/[0.07] bg-black/70 py-5 lg:flex">
+      <Logo small iconOnly />
+      <nav className="mt-8 flex flex-col gap-2">{NAV.slice(0, -1).map(n => btn(n.id, n.label, n.Icon))}</nav>
+      <div className="mt-auto">{btn(st.id, st.label, st.Icon)}</div>
     </aside>
   )
 }
@@ -54,15 +49,17 @@ export function Header({ go, onSearch }: { go: Go; onSearch: (q: string) => void
   return (
     <>
       <div className="flex items-center justify-between lg:hidden"><Logo small /><div className="flex items-center gap-3"><WalletButton compact /><Bell size={20} className="text-nx-soft" /><Avatar /></div></div>
-      <header className="hidden items-center gap-4 lg:flex">
+      <header className="hidden items-center gap-3 lg:flex">
         <div className="relative flex-1">
-          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-nx-soft" />
+          <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-nx-soft" />
           <input ref={ref} value={q} onChange={e => setQ(e.target.value)} onKeyDown={e => e.key === 'Enter' && submit()} placeholder="Search protocols, wallets, reports…" aria-label="Search"
-            className="w-full rounded-xl border border-nx-line bg-nx-card/50 py-2.5 pl-9 pr-10 text-sm placeholder:text-nx-soft/70 focus:border-nx-accent" />
-          <kbd className="absolute right-3 top-1/2 -translate-y-1/2 rounded border border-nx-line px-1.5 text-xs text-nx-soft">/</kbd>
+            className="w-full rounded-full border border-white/[0.07] bg-white/[0.04] py-2.5 pl-10 pr-10 text-sm placeholder:text-nx-soft/70 focus:border-nx-accent" />
+          <kbd className="absolute right-4 top-1/2 -translate-y-1/2 rounded border border-white/10 px-1.5 text-xs text-nx-soft">/</kbd>
         </div>
-        <WalletButton /><Bell size={20} className="text-nx-soft" /><Moon size={20} className="text-nx-soft" />
-        <div className="flex items-center gap-3 rounded-xl border border-nx-line bg-nx-card/50 py-1.5 pl-2 pr-4"><Avatar /><div className="text-sm leading-tight"><div className="font-medium">Ahmad Choirudin</div><div className="text-xs text-nx-soft">Researcher</div></div></div>
+        <WalletButton />
+        <span className="grid h-10 w-10 place-items-center rounded-full border border-white/[0.07] bg-white/[0.04]"><Bell size={17} className="text-nx-soft" /></span>
+        <span className="grid h-10 w-10 place-items-center rounded-full border border-white/[0.07] bg-white/[0.04]"><Moon size={17} className="text-nx-soft" /></span>
+        <div className="flex items-center gap-3 rounded-full border border-white/[0.07] bg-white/[0.04] py-1.5 pl-1.5 pr-5"><Avatar /><div className="text-sm leading-tight"><div className="font-medium">Ahmad Choirudin</div><div className="text-xs text-nx-soft">Researcher</div></div></div>
       </header>
     </>
   )
@@ -76,17 +73,17 @@ export function MobileNav({ page, go }: { page: Page; go: Go }) {
   ]
   const rest = NAV.filter(n => ['protocols', 'kanban', 'assistant', 'settings'].includes(n.id))
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-20 border-t border-nx-line bg-nx-bg/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden">
+    <nav className="fixed inset-x-0 bottom-0 z-20 border-t border-white/[0.07] bg-black/90 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden">
       {more && (
-        <div className="absolute bottom-full right-3 mb-2 w-48 rounded-2xl border border-nx-line bg-nx-panel p-2 shadow-xl">
-          {rest.map(({ id, label, Icon }) => <button key={id} onClick={() => { go(id); setMore(false) }} className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm text-nx-soft hover:bg-nx-accent/20 hover:text-white"><Icon size={16} />{label}</button>)}
+        <div className="absolute bottom-full right-3 mb-2 w-48 rounded-2xl border border-white/10 bg-nx-panel p-2 shadow-xl">
+          {rest.map(({ id, label, Icon }) => <button key={id} onClick={() => { go(id); setMore(false) }} className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm text-nx-soft hover:bg-white/5 hover:text-white"><Icon size={16} />{label}</button>)}
         </div>
       )}
       <div className="grid grid-cols-5">
         {items.map(({ id, label, Icon }) => (
-          <button key={id} onClick={() => { go(id); setMore(false) }} className={`flex flex-col items-center gap-1 py-2.5 text-[11px] ${page === id ? 'text-nx-accent' : 'text-nx-soft'}`}><Icon size={20} />{label}</button>
+          <button key={id} onClick={() => { go(id); setMore(false) }} className={`flex flex-col items-center gap-1 py-2.5 text-[11px] ${page === id ? 'text-white' : 'text-nx-soft'}`}><Icon size={20} />{label}</button>
         ))}
-        <button onClick={() => setMore(m => !m)} className={`flex flex-col items-center gap-1 py-2.5 text-[11px] ${rest.some(r => r.id === page) ? 'text-nx-accent' : 'text-nx-soft'}`}><MoreHorizontal size={20} />More</button>
+        <button onClick={() => setMore(m => !m)} className={`flex flex-col items-center gap-1 py-2.5 text-[11px] ${rest.some(r => r.id === page) ? 'text-white' : 'text-nx-soft'}`}><MoreHorizontal size={20} />More</button>
       </div>
     </nav>
   )

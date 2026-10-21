@@ -26,9 +26,9 @@ export default function App() {
   const page = (Object.keys(PATHS) as Page[]).find(p => PATHS[p] === pathname) ?? 'dashboard'
   const go = (p: Page) => { navigate(PATHS[p]); window.scrollTo({ top: 0 }) }
   return (
-    <div className="min-h-screen lg:grid lg:grid-cols-[240px_minmax(0,1fr)]">
+    <div className="min-h-screen lg:grid lg:grid-cols-[84px_minmax(0,1fr)]">
       <Sidebar page={page} go={go} />
-      <div className="mx-auto w-full max-w-6xl space-y-5 px-4 pb-24 pt-4 lg:px-8 lg:pb-10 lg:pt-6">
+      <div className="mx-auto w-full max-w-7xl space-y-5 px-4 pb-24 pt-4 lg:px-8 lg:pb-10 lg:pt-6">
         <Header go={go} onSearch={setQuery} />
         <Routes>
           <Route path="/" element={<Dashboard coins={coins} live={live} go={go} />} />

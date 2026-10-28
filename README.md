@@ -9,7 +9,7 @@
   <br />
   A personal Web3 research workspace designed to bring market data, protocol analytics, wallet monitoring, and research workflows into one focused interface.
 </p><p align="center">
-  <a href="https://web3-research-os.vercel.app/"><strong>↗ OPEN LIVE DEMO</strong></a>
+  <a href="https://web3os.my.id/"><strong>↗ OPEN LIVE DEMO</strong></a>
   &nbsp; · &nbsp;
   <a href="https://github.com/ahmad-choirudin"><strong>GITHUB PROFILE</strong></a>
 </p>---
@@ -58,7 +58,7 @@ Instead of jumping between multiple tools, the application brings essential Web3
 </table>◈ PREVIEW
 
 <p align="center">
-  <a href="https://web3-research-os.vercel.app/">
+  <a href="https://web3os.my.id/">
     <img src="https://placehold.co/1200x675/0A0A0A/C4F56A?text=CUBBIE+%2F%2F+WEB3+RESEARCH+OS&font=space-grotesk" alt="CUBBIE Web3 Research OS dashboard preview placeholder" width="100%" />
   </a>
   <br />
@@ -158,9 +158,9 @@ Ahmad Choirudin — CUBBIE
 Web3 Research · Crypto Markets · DeFi · Frontend Development
 
 <p align="center">
-  <a href="https://ahmadchoirudin.vercel.app/">Portfolio</a>
+  <a href="https://www.ahmadchoirudin.my.id/">Portfolio</a>
   &nbsp; · &nbsp;
-  <a href="https://web3-research-os.vercel.app/">Live Demo</a>
+  <a href="https://web3os.my.id/">Live Demo</a>
   &nbsp; · &nbsp;
   <a href="https://github.com/ahmad-choirudin">GitHub</a>
   &nbsp; · &nbsp;

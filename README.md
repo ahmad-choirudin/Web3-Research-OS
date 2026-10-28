@@ -165,6 +165,4 @@ Web3 Research · Crypto Markets · DeFi · Frontend Development
   <a href="https://github.com/ahmad-choirudin">GitHub</a>
   &nbsp; · &nbsp;
   <a href="https://x.com/CubbieOG">X / @CubbieOG</a>
-</p><p align="center">
-  <sub>Built for research. Designed for the decentralized world. ◈</sub>
 </p>

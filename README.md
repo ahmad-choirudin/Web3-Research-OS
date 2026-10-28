@@ -1,87 +1,170 @@
-# CUBBIE · Web3 Research OS
+◈ CUBBIE — Web3 Research OS
 
-A dark, neon-themed dashboard for tracking the crypto market, organizing Web3 research, and watching wallets, all in one place.
+<p align="center">
+  <img src="https://img.shields.io/badge/WEB3-RESEARCH_OS-C4F56A?style=for-the-badge&labelColor=0A0A0A" alt="Web3 Research OS" />
+  <img src="https://img.shields.io/badge/STATUS-LIVE-C4F56A?style=for-the-badge&labelColor=0A0A0A" alt="Live" />
+  <img src="https://img.shields.io/badge/BUILT_WITH-REACT_+_TYPESCRIPT-61DAFB?style=for-the-badge&labelColor=0A0A0A" alt="React and TypeScript" />
+</p><p align="center">
+  <strong>Your command center for crypto markets, DeFi intelligence, and on-chain research.</strong>
+  <br />
+  A personal Web3 research workspace designed to bring market data, protocol analytics, wallet monitoring, and research workflows into one focused interface.
+</p><p align="center">
+  <a href="https://web3-research-os.vercel.app/"><strong>↗ OPEN LIVE DEMO</strong></a>
+  &nbsp; · &nbsp;
+  <a href="https://github.com/ahmad-choirudin"><strong>GITHUB PROFILE</strong></a>
+</p>---
 
-[Live demo] ( https://web3-research-os.vercel.app/ )
+◈ OVERVIEW
 
-<!-- Add screenshots: put images in a docs/ folder, then uncomment:
+CUBBIE · Web3 Research OS is a dark-themed crypto intelligence dashboard built for exploring market movements, discovering DeFi protocols, tracking EVM wallets, and organizing research.
 
+Instead of jumping between multiple tools, the application brings essential Web3 research workflows into one responsive workspace.
 
-![Dashboard](docs/dashboard.png)
+«Research smarter. Track the market. Stay on-chain.»
 
+◈ FEATURES
 
+<table>
+  <tr>
+    <td width="50%">
+      <strong>01 / MARKET INTELLIGENCE</strong><br />
+      Live crypto prices, 24-hour changes, market capitalization, sparklines, and historical price charts for 12 assets.
+    </td>
+    <td width="50%">
+      <strong>02 / DEFI EXPLORER</strong><br />
+      Explore DeFi protocols and monitor Total Value Locked (TVL) using DefiLlama data.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <strong>03 / WALLET MONITORING</strong><br />
+      Connect MetaMask, inspect wallet addresses, networks and balances, and maintain a personal EVM address watchlist.
+    </td>
+    <td width="50%">
+      <strong>04 / RESEARCH WORKSPACE</strong><br />
+      Save research notes, organize references, filter by tags, and manage topics using a Kanban workflow.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <strong>05 / CRYPTO NEWS</strong><br />
+      Access crypto headlines through the CryptoCompare API.
+    </td>
+    <td width="50%">
+      <strong>06 / AI RESEARCH ASSISTANT</strong><br />
+      Explore an assistant demo, with optional Claude API integration through Settings.
+    </td>
+  </tr>
+</table>◈ PREVIEW
 
+<p align="center">
+  <a href="https://web3-research-os.vercel.app/">
+    <img src="https://placehold.co/1200x675/0A0A0A/C4F56A?text=CUBBIE+%2F%2F+WEB3+RESEARCH+OS&font=space-grotesk" alt="CUBBIE Web3 Research OS dashboard preview placeholder" width="100%" />
+  </a>
+  <br />
+  <sub>Dashboard preview placeholder — replace with an actual screenshot of the application.</sub>
+</p>◈ TECH STACK
 
-![Coin detail](docs/coin-detail.png)
+<p>
+  <img src="https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/React_Router-CA4245?style=flat-square&logo=reactrouter&logoColor=white" alt="React Router" />
+  <img src="https://img.shields.io/badge/MetaMask-E2761B?style=flat-square&logo=metamask&logoColor=white" alt="MetaMask" />
+</p>Integration| Purpose
+CoinGecko| Cryptocurrency market data and price history
+DefiLlama| DeFi protocol TVL
+CryptoCompare| Cryptocurrency news
+EIP-1193| Browser wallet connectivity
+Anthropic Claude| Optional AI assistant integration
 
+◈ GETTING STARTED
 
--->
+Requirements: Node.js 18 or newer and npm.
 
-## Features
+# Clone the repository
+git clone <YOUR_REPOSITORY_URL>
+cd <YOUR_PROJECT_DIRECTORY>
 
-- **Market overview:** live prices, 24h change, market cap, and sparklines for 12 coins, with chain filters (CoinGecko).
-- **Coin detail pages:** interactive price chart with 24H, 7D, 30D, 90D, and 1Y ranges, plus market cap and period high/low.
-- **Protocol Explorer:** DeFi protocols with live TVL (DefiLlama).
-- **Latest news:** crypto headlines from CryptoCompare.
-- **Connect Wallet:** MetaMask (or any EIP-1193 wallet). Read-only: it shows your address, network, and balance, and never asks you to sign or send anything.
-- **Research Library:** save notes and references, filter by tag.
-- **Research Kanban:** move research topics through To Research, In Progress, and Completed.
-- **Wallet Tracker:** save and label EVM addresses.
-- **AI Assistant:** demo mode out of the box; connect your own Claude API key (or a proxy) in Settings for real answers.
-- **Responsive:** desktop sidebar layout and a mobile layout with bottom navigation.
-
-## Tech stack
-
-React 18, TypeScript, Vite, Tailwind CSS 3, React Router (hash routing), lucide-react.
-
-## Getting started
-
-Requires Node.js 18 or newer.
-
-```bash
+# Install dependencies
 npm install
-npm run dev       # start the dev server
-npm run build     # type-check and build to dist/
-npm run preview   # preview the production build
-```
 
-## Configuration
+# Start development server
+npm run dev
 
-| Item | Where | Notes |
-| --- | --- | --- |
-| `VITE_CRYPTOCOMPARE_KEY` | `.env` (see `.env.example`) | Optional. Use it if the news API rate-limits you. |
-| Anthropic API key | In the app: Settings | Stored in your browser's localStorage and sent only to api.anthropic.com. |
-| Proxy URL | In the app: Settings | Recommended for public sites. Example in `proxy/cloudflare-worker.js`. |
+# Build for production
+npm run build
 
-**Security:** never commit an API key, and never put one in a `VITE_` variable, because those are bundled into the public JavaScript. For a public deployment, use the proxy so the key stays on the server.
+# Preview production build
+npm run preview
 
-## Project structure
+◈ CONFIGURATION
 
-```
+Create a ".env" file in the project root if you need a CryptoCompare API key:
+
+VITE_CRYPTOCOMPARE_KEY=your_cryptocompare_key
+
+The news API key is optional. Configure the AI assistant in the application's Settings.
+
+Security considerations
+
+- Never commit API keys or secrets to GitHub.
+- Variables prefixed with "VITE_" are exposed in the client-side bundle.
+- For public deployments, use a server-side proxy for private API credentials.
+- The AI API key configured in browser settings is stored in "localStorage"; it is not a secure secret vault.
+- Wallet integration is read-only: the app does not request signatures or initiate transactions.
+
+◈ DATA & STORAGE
+
+- Market and protocol information may fall back to sample data when external APIs are unavailable or rate-limited.
+- Dashboard summary cards currently use sample values.
+- Research notes, Kanban cards, and tracked wallets are stored locally in the browser using "localStorage".
+- Local research data is not synchronized to a backend.
+
+◈ PROJECT STRUCTURE
+
 src/
-  components/   Layout (sidebar, header, mobile nav), WalletButton, shared UI
-  lib/          market data, news, wallet logic, Claude API helper, storage
-  pages/        Dashboard, CoinDetail, Library, Protocols, Wallets, Kanban,
-                Assistant, Analytics, Settings
-public/         hero.jpg (dashboard banner)
-proxy/          example Cloudflare Worker for the Claude API
-```
+├── components/    # Layout, navigation, wallet controls and shared UI
+├── lib/           # Market data, APIs, wallet logic and storage
+└── pages/         # Dashboard, analytics, research and settings
+public/            # Static assets
+proxy/             # Example Cloudflare Worker proxy
 
-## Deployment
+◈ DEPLOYMENT
 
-- **Vercel:** import the repo. The Vite preset works as is (build `npm run build`, output `dist`).
-- **GitHub Pages:** push to `main`. The workflow in `.github/workflows/deploy.yml` builds and publishes the site. Set Settings → Pages → Source to GitHub Actions.
+Deploy with "Vercel" (https://vercel.com/) or GitHub Pages.
 
-The app uses hash routing (`#/wallets`) and a relative base path, so it works on both without extra configuration.
+For Vercel, import the repository and use:
 
-## Data sources
+- Framework preset: Vite
+- Build command: "npm run build"
+- Output directory: "dist"
 
-- [CoinGecko](https://www.coingecko.com/en/api): prices and charts
-- [DefiLlama](https://defillama.com/docs/api): protocol TVL
-- [CryptoCompare](https://min-api.cryptocompare.com/): news
+The application uses hash-based routing and a relative base path for deployment flexibility.
 
-If an API is unreachable or rate-limited, the app falls back to sample data and labels it clearly. The four stat cards at the top of the dashboard (protocols, watchlist, reports, portfolio) currently show sample values.
+◈ ROADMAP
 
-## Notes
+- [ ] Improve market analytics and research summaries
+- [ ] Expand protocol discovery and filtering
+- [ ] Add more wallet-monitoring insights
+- [ ] Refine the mobile research workflow
+- [ ] Expand AI-assisted research capabilities
 
-Notes, Kanban cards, and tracked wallets are stored only in your browser (localStorage). Nothing is sent to a server.
+◈ BUILT BY
+
+Ahmad Choirudin — CUBBIE
+
+Web3 Research · Crypto Markets · DeFi · Frontend Development
+
+<p align="center">
+  <a href="https://ahmadchoirudin.vercel.app/">Portfolio</a>
+  &nbsp; · &nbsp;
+  <a href="https://web3-research-os.vercel.app/">Live Demo</a>
+  &nbsp; · &nbsp;
+  <a href="https://github.com/ahmad-choirudin">GitHub</a>
+  &nbsp; · &nbsp;
+  <a href="https://x.com/CubbieOG">X / @CubbieOG</a>
+</p><p align="center">
+  <sub>Built for research. Designed for the decentralized world. ◈</sub>
+</p>

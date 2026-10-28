@@ -1,5 +1,3 @@
-// Proxy Cloudflare Worker: menyimpan ANTHROPIC_API_KEY di server agar tidak terlihat di browser.
-// Variabel (Settings → Variables): ANTHROPIC_API_KEY (secret), ALLOWED_ORIGIN (mis. https://namamu.github.io)
 export default {
   async fetch(req, env) {
     const origin = req.headers.get('Origin') || ''

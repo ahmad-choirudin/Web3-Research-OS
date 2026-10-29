@@ -59,10 +59,10 @@ Instead of jumping between multiple tools, the application brings essential Web3
 
 <p align="center">
   <a href="https://web3os.my.id/">
-    <img src="dashboard.jpg" alt="CUBBIE Web3 Research OS dashboard preview placeholder" width="100%" />
+    <img src="docs/dashboard.jpg" alt="CUBBIE Web3 Research OS dashboard preview placeholder" width="100%" />
   </a>
   <br />
-  <sub>Dashboard preview placeholder — replace with an actual screenshot of the application.</sub>
+  <sub>Dashboard preview placeholder</sub>
 </p>◈ TECH STACK
 
 <p>

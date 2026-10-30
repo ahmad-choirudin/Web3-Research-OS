@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { Header, MobileNav, Sidebar } from './components/Layout'
 import { useMarket } from './lib/market'
@@ -24,24 +24,35 @@ export default function App() {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const page = (Object.keys(PATHS) as Page[]).find(p => PATHS[p] === pathname) ?? 'dashboard'
-  const go = (p: Page) => { navigate(PATHS[p]); window.scrollTo({ top: 0 }) }
+  const go = (p: Page) => navigate(PATHS[p])
+  // Kembali ke atas di setiap pergantian halaman, termasuk dari link (mis. ke /coin/:id).
+  useEffect(() => { window.scrollTo({ top: 0 }) }, [pathname])
+  // Key per bagian URL: transisi muncul saat pindah halaman, tapi tidak saat coin -> coin.
+  const section = pathname.split('/')[1]
+
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[84px_minmax(0,1fr)]">
       <Sidebar page={page} go={go} />
-      <div className="w-full max-w-[1800px] space-y-5 px-4 pb-24 pt-4 lg:px-8 lg:pb-10 lg:pt-6">
+      <div className="min-w-0">
         <Header go={go} onSearch={setQuery} />
-        <Routes>
-          <Route path="/" element={<Dashboard coins={coins} live={live} go={go} />} />
-          <Route path="/library" element={<Library go={go} />} />
-          <Route path="/protocols" element={<Protocols go={go} query={query} setQuery={setQuery} />} />
-          <Route path="/wallets" element={<Wallets go={go} />} />
-          <Route path="/analytics" element={<Analytics coins={coins} go={go} />} />
-          <Route path="/kanban" element={<Kanban go={go} />} />
-          <Route path="/assistant" element={<Assistant go={go} coins={coins} />} />
-          <Route path="/settings" element={<Settings go={go} />} />
-          <Route path="/coin/:id" element={<CoinDetail coins={coins} go={go} />} />
-          <Route path="*" element={<Dashboard coins={coins} live={live} go={go} />} />
-        </Routes>
+        <main
+          key={section}
+          className="w-full max-w-[1800px] animate-fade-up px-4 pb-24 pt-5 lg:px-8 lg:pb-10 lg:pt-6"
+          style={{ animationFillMode: 'backwards', animationDuration: '.4s' }}
+        >
+          <Routes>
+            <Route path="/" element={<Dashboard coins={coins} live={live} go={go} />} />
+            <Route path="/library" element={<Library go={go} />} />
+            <Route path="/protocols" element={<Protocols go={go} query={query} setQuery={setQuery} />} />
+            <Route path="/wallets" element={<Wallets go={go} />} />
+            <Route path="/analytics" element={<Analytics coins={coins} go={go} />} />
+            <Route path="/kanban" element={<Kanban go={go} />} />
+            <Route path="/assistant" element={<Assistant go={go} coins={coins} />} />
+            <Route path="/settings" element={<Settings go={go} />} />
+            <Route path="/coin/:id" element={<CoinDetail coins={coins} go={go} />} />
+            <Route path="*" element={<Dashboard coins={coins} live={live} go={go} />} />
+          </Routes>
+        </main>
       </div>
       <MobileNav page={page} go={go} />
     </div>

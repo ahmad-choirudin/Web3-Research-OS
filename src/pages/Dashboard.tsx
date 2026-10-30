@@ -6,6 +6,7 @@ import { timeAgo } from '../lib/store'
 import { Card, Change, Chip, CoinIcon, Sparkline } from '../components/ui'
 import { compact, usd, type Coin } from '../lib/market'
 import type { Go } from '../lib/types'
+import AreaChart from '../components/charts/AreaChart'
 
 const CHAINS = ['All Chains', 'Ethereum', 'BNB Chain', 'Solana', 'Arbitrum', 'Polygon']
 const STATS = [
@@ -116,7 +117,7 @@ export default function Dashboard({ coins, live, go }: { coins: Coin[]; live: bo
         <Card className="p-5">
           <h2 className="text-lg font-semibold">Overview</h2>
           <p className="text-xs text-nx-soft">Bitcoin, last 7 days</p>
-          <div className="mt-3"><Area data={btc?.spark ?? []} /></div>
+          <div className="mt-3"><AreaChart data={btc?.spark ?? []} height={160} showRange format={usd} ariaLabel="Bitcoin price, last 7 days" /></div>
           <div className="mt-2 flex items-end justify-between">
             <div className="text-4xl font-semibold">{btc ? <Change v={btc.change} /> : '—'}</div>
             <div className="text-right text-xs text-nx-soft">{live ? 'Live' : 'Sample data'}</div>
@@ -204,4 +205,4 @@ export default function Dashboard({ coins, live, go }: { coins: Coin[]; live: bo
       </div>
     </div>
   )
-    }
+}

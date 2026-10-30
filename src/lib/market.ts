@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
 
-export interface Coin { id: string; name: string; symbol: string; price: number; change: number; mcap: number; spark: number[]; chain: string }
+export interface Coin { id: string; name: string; symbol: string; price: number; change: number; mcap: number; spark: number[]; chain: string; image?: string }
 
-// To add a coin, copy one line and edit it:
-// [CoinGecko id, symbol, name, chain, sample price, sample 24h %, sample market cap]
 const LIST: [string, string, string, string, number, number, number][] = [
   ['bitcoin', 'BTC', 'Bitcoin', 'Bitcoin', 67842.32, 2.41, 1.33e12],
   ['ethereum', 'ETH', 'Ethereum', 'Ethereum', 2621.17, 3.12, 315.4e9],
@@ -19,6 +17,9 @@ const LIST: [string, string, string, string, number, number, number][] = [
   ['polygon-ecosystem-token', 'POL', 'Polygon', 'Polygon', 0.46, 1.5, 4.8e9],
 ]
 const CHAIN: Record<string, string> = Object.fromEntries(LIST.map(l => [l[0], l[3]]))
+
+const IMAGES: Record<string, string> = {}
+export const coinImage = (symbol: string): string | undefined => IMAGES[symbol]
 
 function wave(seed: number, up: boolean) {
   const a: number[] = []; let v = 50
@@ -40,11 +41,12 @@ export function useMarket() {
         const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + LIST.map(l => l[0]).join(',') + '&order=market_cap_desc&sparkline=true'
         const r = await fetch(url)
         if (!r.ok) throw new Error(String(r.status))
-        const d = await r.json() as Array<{ id: string; name: string; symbol: string; current_price: number; price_change_percentage_24h: number; market_cap: number; sparkline_in_7d?: { price: number[] } }>
+        const d = await r.json() as Array<{ id: string; name: string; symbol: string; image?: string; current_price: number; price_change_percentage_24h: number; market_cap: number; sparkline_in_7d?: { price: number[] } }>
         if (dead || !Array.isArray(d) || d.length === 0) return
+        d.forEach(c => { if (c.image) IMAGES[c.symbol.toUpperCase()] = c.image })
         setCoins(d.map(c => ({
           id: c.id, name: c.name, symbol: c.symbol.toUpperCase(), price: c.current_price, change: c.price_change_percentage_24h ?? 0,
-          mcap: c.market_cap, spark: (c.sparkline_in_7d?.price ?? []).filter((_, i) => i % 7 === 0), chain: CHAIN[c.id] ?? c.name,
+          mcap: c.market_cap, spark: (c.sparkline_in_7d?.price ?? []).filter((_, i) => i % 7 === 0), chain: CHAIN[c.id] ?? c.name, image: c.image,
         })))
         setLive(true)
       } catch { if (!dead) setLive(false) }

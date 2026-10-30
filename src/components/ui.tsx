@@ -15,7 +15,9 @@ const CARD: Record<CardVariant, string> = {
 export function Card({ className = '', children, variant = 'base', interactive = false, reveal, style }: {
   className?: string; children: ReactNode; variant?: CardVariant; interactive?: boolean; reveal?: number; style?: CSSProperties
 }) {
-  const s = reveal === undefined ? style : { animationDelay: `${reveal * 60}ms`, ...style }
+const s: CSSProperties | undefined = reveal === undefined
+    ? style
+    : { animationDelay: `${reveal * 60}ms`, animationFillMode: 'backwards', ...style }
   return (
     <div
       style={s}

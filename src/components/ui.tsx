@@ -99,7 +99,7 @@ export function Sparkline({ data, up = true, className = 'h-8 w-24' }: { data: n
   const gid = 'sp' + useId().replace(/:/g, '')
   if (data.length < 2) return <div className={className} />
   const min = Math.min(...data), max = Math.max(...data), r = max - min || 1
-  const pts = data.map((v, i) => `${(i / (data.length - 1)) * 100},${30 - ((v - min) / r) * 26}`).join(' ')
+  const d = smoothPath(data.map((v, i): XY => [(i / (data.length - 1)) * 100, 30 - ((v - min) / r) * 26]), 2)
   const color = up ? '#4ade80' : '#ff5d5d'
   return (
     <svg viewBox="0 0 100 32" preserveAspectRatio="none" className={className} aria-hidden>
@@ -109,8 +109,8 @@ export function Sparkline({ data, up = true, className = 'h-8 w-24' }: { data: n
           <stop offset="1" stopColor={color} stopOpacity="0" />
         </linearGradient>
       </defs>
-      <polygon points={`0,32 ${pts} 100,32`} fill={`url(#${gid})`} />
-      <polyline points={pts} fill="none" stroke={color} strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+      <path d={`${d}L100,32L0,32Z`} fill={`url(#${gid})`} />
+      <path d={d} fill="none" stroke={color} strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
     </svg>
   )
 }

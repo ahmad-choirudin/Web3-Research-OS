@@ -2,6 +2,7 @@ import { useId, useState } from 'react'
 import type { ButtonHTMLAttributes, CSSProperties, ReactNode } from 'react'
 import { ChevronLeft } from 'lucide-react'
 import { coinImage } from '../lib/market'
+import { smoothPath, type XY } from '../lib/chart'
 
 /* ───────── Card ───────── */
 type CardVariant = 'base' | 'raised' | 'flat' | 'accent'

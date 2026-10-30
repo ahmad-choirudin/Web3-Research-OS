@@ -41,12 +41,14 @@ export default {
         shimmer: {
           '0%': { backgroundPosition: '200% 0' },
           '100%': { backgroundPosition: '-200% 0' },
+          draw: { '0%': { strokeDashoffset: '1' }, '100%': { strokeDashoffset: '0' } },
         },
       },
       animation: {
         'fade-up': 'fade-up .55s cubic-bezier(.22,1,.36,1) both',
         'fade-in': 'fade-in .4s ease-out both',
         shimmer: 'shimmer 1.8s linear infinite',
+        draw: 'draw 1.1s cubic-bezier(.22,1,.36,1) both',
       },
     },
   },
